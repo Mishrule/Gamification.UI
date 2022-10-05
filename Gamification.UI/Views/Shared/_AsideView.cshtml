@@ -1,4 +1,9 @@
-﻿<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+
+<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
         <a href="index.html" class="app-brand-link">
             <span class="app-brand-logo demo">
@@ -55,25 +60,28 @@
     <div class="menu-inner-shadow"></div>
 
     <ul class="menu-inner py-1">
-        <!-- Dashboard -->
-        <li class="menu-item">
-            <a asp-controller="Home" asp-action="Index" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div data-i18n="Analytics">Dashboard</div>
-            </a>
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <!-- Dashboard -->
+            <li class="menu-item">
+                <a asp-controller="Home" asp-action="Index" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                    <div data-i18n="Analytics">Dashboard</div>
+                </a>
+            </li>
+            <li class="menu-header small text-uppercase">
+                <span class="menu-header-text">Leader Board</span>
+            </li>
+            <li class="menu-item">
+                <a asp-controller="Home" asp-action="LeaderBoard" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-trophy"></i>
+                    <div data-i18n="Without menu">Leaders</div>
+                </a>
+            </li>
+            <li class="menu-header small text-uppercase">
+                <span class="menu-header-text">User Account</span>
         </li>
-         <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">Leader Board</span>
-        </li>
-        <li class="menu-item">
-            <a asp-controller="Home" asp-action="LeaderBoard" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-trophy"></i>
-                <div data-i18n="Without menu">Leaders</div>
-            </a>
-        </li>
-         <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">User Account</span>
-        </li>
+        }
         <partial name="_LoginPartial" />
         <!-- Layouts -->
       @*  <li class="menu-item">
