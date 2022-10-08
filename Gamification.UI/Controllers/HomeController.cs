@@ -1,12 +1,11 @@
 ﻿using Gamification.UI.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 
 namespace Gamification.UI.Controllers
 {
-	[Authorize]
+	//[Authorize]
 	public class HomeController : Controller
 	{
 		private readonly ILogger<HomeController> _logger;
@@ -22,6 +21,11 @@ namespace Gamification.UI.Controllers
 		}
 
 		public IActionResult LeaderBoard()
+		{
+			return View();
+		}
+
+		public IActionResult Tasks()
 		{
 			return View();
 		}

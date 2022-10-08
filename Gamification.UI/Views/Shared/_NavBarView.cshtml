@@ -22,19 +22,43 @@
             </div>
         </div>
         <!-- /Search -->
-@if (SignInManager.IsSignedIn(User))
-        {
+@*@if (SignInManager.IsSignedIn(User))
+        {*@
             <ul class="navbar-nav flex-row align-items-center ms-auto">
                 <!-- Place this tag where you want the button to render. -->
-            <li class="nav-item lh-1 me-3">
+            @*<li class="nav-item lh-1 me-3">
                 <a class="github-button"
-                   href="https://github.com/themeselection/sneat-html-admin-template-free"
+                   href="#"
                    data-icon="octicon-star"
                    data-size="large"
                    data-show-count="true"
-                   aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">Star</a>
-            </li>
+                   aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">Points <span class="badge rounded-pill text-primary">4</span></a>*@
 
+                  @* <button type="button" class="btn btn-icon btn-success btn-sm">
+                              <i class='bx bxs-star-half' ></i><span class="badge rounded-pill text-primary">4</span>
+                            </button>
+
+                            <button type="button" class="btn rounded-pill btn-outline-primary btn-sm">
+                              <span class="tf-icons bx bxs-star-half"></span>&nbsp; Points &nbsp;<span class="badge rounded-pill">4</span>
+                            </button>
+
+            </li>*@
+            <li class="nav-item lh-1 me-3">
+                <button type="button" class="btn rounded-pill btn-outline-primary btn-sm">
+                    <span class="tf-icons bx bxs-star-half"></span>&nbsp; Points &nbsp;<span class="badge rounded-pill">4</span>
+                </button>
+            </li>
+            <li class="nav-item lh-1 me-3">
+                <button type="button" class="btn rounded-pill btn-outline-primary btn-sm">
+                    <span class="tf-icons bx bxs-badge"></span>&nbsp; Badge &nbsp;<span class="badge rounded-pill">4</span>
+                </button>
+            </li>
+            <li class="nav-item lh-1 me-3">
+                <button type="button" class="btn rounded-pill btn-outline-primary btn-sm">
+                    <span class="tf-icons bx bxs-crown"></span>&nbsp; Crown &nbsp;<span class="badge rounded-pill">4</span>
+                </button>
+            </li>
+           
             <!-- User -->
             @*<li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
@@ -95,6 +119,6 @@
             </li>*@
             <!--/ User -->
         </ul>
-        }
+       @* }*@
     </div>
 </nav>
