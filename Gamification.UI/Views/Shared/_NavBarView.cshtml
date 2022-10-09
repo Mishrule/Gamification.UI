@@ -22,8 +22,8 @@
             </div>
         </div>
         <!-- /Search -->
-@*@if (SignInManager.IsSignedIn(User))
-        {*@
+@if (SignInManager.IsSignedIn(User))
+        {
             <ul class="navbar-nav flex-row align-items-center ms-auto">
                 <!-- Place this tag where you want the button to render. -->
             @*<li class="nav-item lh-1 me-3">
@@ -43,6 +43,7 @@
                             </button>
 
             </li>*@
+
             <li class="nav-item lh-1 me-3">
                 <button type="button" class="btn rounded-pill btn-outline-primary btn-sm">
                     <span class="tf-icons bx bxs-star-half"></span>&nbsp; Points &nbsp;<span class="badge rounded-pill">4</span>
@@ -119,6 +120,6 @@
             </li>*@
             <!--/ User -->
         </ul>
-       @* }*@
+        }
     </div>
 </nav>
