@@ -117,3 +117,25 @@
         <!--/ Order Statistics -->
     </div>
 </div>
+@section scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var badges = localStorage.getItem("badges");
+            var crown = localStorage.getItem("crown");
+            var point = localStorage.getItem("point");
+
+            $('#badges').text(badges);
+            $('#crown').text(crown);
+            $('#point').text(point);
+
+
+            
+        });
+
+
+    
+
+
+</script>
+}

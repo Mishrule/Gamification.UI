@@ -10,7 +10,7 @@
                     <div class="card-body">
                         <h5 class="card-title text-primary">Congratulations <span id="userName">@User.Identity.Name</span>! 🎉</h5>
                         <p class="mb-4">
-                            You have completed <span class="fw-bold">72%</span> of the Purchasing Process! Continue the steps to earn more points and badges.
+                            You have completed <span class="fw-bold" id="pTitle">72%</span> of the Purchasing Process! Continue the steps to earn more points and badges.
                         </p>
                         <a href="javascript:;" class="btn btn-sm btn-outline-primary">Back to SAP</a>
                     </div>
@@ -55,8 +55,8 @@
                             </div>*@
                         </div>
                         <span class="fw-semibold d-block mb-1">Points</span>
-                        <h3 class="card-title mb-2">200</h3>
-                        <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +72.80%</small>
+                        <h3 class="card-title mb-2"><span id="pPoint"></span></h3>
+                        <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> next step +5</small>
                     </div>
                 </div>
             </div>
@@ -83,8 +83,8 @@
                             </div>*@
                         </div>
                         <span>Badges</span>
-                        <h3 class="card-title text-nowrap mb-1">400</h3>
-                        <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.42%</small>
+                        <h3 class="card-title text-nowrap mb-1"><span id="pBadge"></span></h3>
+                        <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i>next step +5</small>
                     </div>
                 </div>
             </div>
@@ -119,7 +119,7 @@
                         </div>*@
                     </div>
                     <div id="growthChart"></div>
-                    <div class="text-center fw-semibold pt-3 mb-2">62% Personal Growth</div>
+                    <div class="text-center fw-semibold pt-3 mb-2"><span id="pGrowth"></span> points Personal Growth</div>
 
                    @* <div class="d-flex px-xxl-4 px-lg-2 p-4 gap-xxl-3 gap-lg-1 gap-3 justify-content-between">
                         <div class="d-flex">
@@ -171,8 +171,8 @@
                             </div>*@
                         </div>
                         <span class="d-block mb-1">Crown</span>
-                        <h3 class="card-title text-nowrap mb-2">2k</h3>
-                        <small class="text-danger fw-semibold"><i class="bx bx-down-arrow-alt"></i> -14.82%</small>
+                        <h3 class="card-title text-nowrap mb-2"><span id="pCrown"></span></h3>
+                        <small class="text-danger fw-semibold"><i class="bx bx-up-arrow-alt"></i>next step +5</small>
                     </div>
                 </div>
             </div>
@@ -199,8 +199,8 @@
                             </div>*@
                         </div>
                         <span class="fw-semibold d-block mb-1">Medals</span>
-                        <h3 class="card-title mb-2">14k</h3>
-                        <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.14%</small>
+                        <h3 class="card-title mb-2">0</h3>
+                        <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i>next step +5</small>
                     </div>
                 </div>
             </div>
@@ -709,10 +709,22 @@
              crown = localStorage.getItem('crown');
              point = localStorage.getItem('point');
 
-            $('#badges').text(badges) ;
-            $('#crown').text(crown);
+            
+            
             $('#point').text(point);
 
+            if (point >= 15) {
+                badges +=1
+                localStorage.setItem('badges', badges);
+               
+            }if(point >= 30) {
+                badges +=1
+                crown += 1
+                localStorage.setItem('badges', badges);
+                localStorage.setItem('crown', crown);
+            }
+             $('#badges').text(badges) ;
+             $('#crown').text(crown);
 
             window.username = $('#userName').text();
             var username = window.username;
@@ -720,12 +732,35 @@
             localStorage.setItem("stat", username);
             //alert(window.username);
             $.ajax({
-                url:'Home/Index',
-                method:'POST',
-                data:{ username },
-                success:function(data) {
+                url: 'Home/Index',
+                method: 'POST',
+                data: { username },
+                success: function(data) {
                     console.log(data);
-                    $('#point').text(data.points);
+                    localStorage.setItem('point', data.p);
+                    $('#point').text(data.p);
+                    $('#pCrown').text(data.c);
+                    $('#pGrowth').text(data.p);
+                    $('#pBadge').text(data.b);
+                    $('#pPoint').text(data.p);
+                    $('#pTitle').text(data.p);
+                    if (point >= 30) {
+                        var b = parseInt(badges) + 1;
+
+                        localStorage.setItem('badges', b);
+                        $('#badges').text(b);
+
+                        var c = parseInt(crown) + 1;
+                        localStorage.setItem('crown', crown);
+                        $('#crown').text(c);
+                        console.log("c: " + c)
+                    } else if (data.p >= 15 && data.p <= 29) {
+                        var b = parseInt(badges) + 1;
+                        localStorage.setItem('badges', b);
+                        $('#badges').text(b);
+                    } 
+
+
                 }
             });
         });
