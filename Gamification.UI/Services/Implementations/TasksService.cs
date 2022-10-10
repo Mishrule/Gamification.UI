@@ -2,6 +2,7 @@
 using Gamification.UI.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Gamification.UI.Services.Implementations
@@ -20,6 +21,10 @@ namespace Gamification.UI.Services.Implementations
             return data;
         }
 
-
+        public async Task<IEnumerable<TasksResponse>> GetResponsePoint(string username)
+        {
+            var data = await _db.Responses.Where(q => q.RespondantName == username).ToListAsync();
+            return data;
+        }
     }
 }

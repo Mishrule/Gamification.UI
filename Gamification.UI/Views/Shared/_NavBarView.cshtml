@@ -22,11 +22,11 @@
             </div>
         </div>
         <!-- /Search -->
-@if (SignInManager.IsSignedIn(User))
+        @if (SignInManager.IsSignedIn(User))
         {
             <ul class="navbar-nav flex-row align-items-center ms-auto">
                 <!-- Place this tag where you want the button to render. -->
-            @*<li class="nav-item lh-1 me-3">
+                @*<li class="nav-item lh-1 me-3">
                 <a class="github-button"
                    href="#"
                    data-icon="octicon-star"
@@ -34,7 +34,7 @@
                    data-show-count="true"
                    aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">Points <span class="badge rounded-pill text-primary">4</span></a>*@
 
-                  @* <button type="button" class="btn btn-icon btn-success btn-sm">
+                @* <button type="button" class="btn btn-icon btn-success btn-sm">
                               <i class='bx bxs-star-half' ></i><span class="badge rounded-pill text-primary">4</span>
                             </button>
 
@@ -44,24 +44,24 @@
 
             </li>*@
 
-            <li class="nav-item lh-1 me-3">
-                <button type="button" class="btn rounded-pill btn-outline-primary btn-sm">
-                    <span class="tf-icons bx bxs-star-half"></span>&nbsp; Points &nbsp;<span class="badge rounded-pill">4</span>
-                </button>
-            </li>
-            <li class="nav-item lh-1 me-3">
-                <button type="button" class="btn rounded-pill btn-outline-primary btn-sm">
-                    <span class="tf-icons bx bxs-badge"></span>&nbsp; Badge &nbsp;<span class="badge rounded-pill">4</span>
-                </button>
-            </li>
-            <li class="nav-item lh-1 me-3">
-                <button type="button" class="btn rounded-pill btn-outline-primary btn-sm">
-                    <span class="tf-icons bx bxs-crown"></span>&nbsp; Crown &nbsp;<span class="badge rounded-pill">4</span>
-                </button>
-            </li>
+                <li class="nav-item lh-1 me-3">
+                    <button type="button" class="btn rounded-pill btn-outline-primary btn-sm">
+                        <span class="tf-icons bx bxs-star-half"></span>&nbsp; Points &nbsp;<span class="badge rounded-pill"><span id="point"></span></span>
+                    </button>
+                </li>
+                <li class="nav-item lh-1 me-3">
+                    <button type="button" class="btn rounded-pill btn-outline-primary btn-sm">
+                        <span class="tf-icons bx bxs-badge"></span>&nbsp; Badge &nbsp;<span class="badge rounded-pill"><span id = "badges"></span></span>
+                    </button>
+                </li>
+                <li class="nav-item lh-1 me-3">
+                    <button type="button" class="btn rounded-pill btn-outline-primary btn-sm">
+                        <span class="tf-icons bx bxs-crown"></span>&nbsp; Crown &nbsp;<span class="badge rounded-pill"><span id = "crown"></span></span>
+                    </button>
+                </li>
            
-            <!-- User -->
-            @*<li class="nav-item navbar-dropdown dropdown-user dropdown">
+                <!-- User -->
+                @*<li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
                         <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
@@ -118,8 +118,38 @@
                     </li>
                 </ul>
             </li>*@
-            <!--/ User -->
-        </ul>
+                <!--/ User -->
+            </ul>
         }
     </div>
 </nav>
+@*@section scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script type="text/javascript">
+      
+        $(document).ready(function() {
+
+            $('#badges').text('0');
+            $('#crown').text('0');
+            $('#point').text('0');
+
+
+
+            window.username = $('#userName').text();
+            var username = window.username;
+            alert(window.username);
+            $.ajax({
+                url:'Home/Index',
+                method:'POST',
+                data:{ username },
+                success:function(data) {
+                    console.log(data);
+                    $('#point').text(data.points);
+                }
+            });
+        });
+
+
+
+</script>
+}*@

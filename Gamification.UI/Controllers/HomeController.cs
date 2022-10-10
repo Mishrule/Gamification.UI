@@ -24,6 +24,17 @@ namespace Gamification.UI.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public async Task<IActionResult> Index(string username)
+        {
+            var points = 0;
+            var data = await _tasksServices.GetResponsePoint(username);
+            foreach (var item in data)
+            {
+                points += item.Score;
+            }
+            return Ok(points);
+        }
 
         public IActionResult LeaderBoard()
         {

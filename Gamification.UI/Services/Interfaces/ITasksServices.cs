@@ -7,5 +7,6 @@ namespace Gamification.UI.Services.Interfaces
     public interface ITasksServices
     {
         Task<IEnumerable<Tasks>> GetTasks();
+        Task<IEnumerable<TasksResponse>> GetResponsePoint(string username);
     }
 }

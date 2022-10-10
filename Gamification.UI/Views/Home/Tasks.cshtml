@@ -16,9 +16,9 @@
             <div class="col-sm-12 col-md-4">
                 <div class="card text-end mb-3">
                     <div class="card-body">
-                        <h5 class="card-title">@task.StepNumber</h5>
+                        <h5 class="card-title" id="st">@task.StepNumber <span id="taskid" hidden>@task.Id</span></h5>
                         <p class="card-text">@task.Description. </p>
-                        <a href="javascript:void(0)" class="btn btn-primary">Complete</a>
+                        <button type="button" id="@task.Id" class="btn btn-primary complete">Complete</button>
                     </div>
                 </div>
             </div>
@@ -26,3 +26,40 @@
     }
 
 </div>
+@section scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var badges = localStorage.getItem("badges");
+            var crown = localStorage.getItem("crown");
+            var point = localStorage.getItem("point");
+
+            $('#badges').text(badges);
+            $('#crown').text(crown);
+            $('#point').text(point);
+
+
+            $(document).on('click',
+                '.complete',
+                function() {
+                    var data = $(this).attr('id');
+                    //alert(data);
+                    
+                    var user = localStorage.getItem("stat");
+                    alert(user);
+                    var taskResponse = {
+                        TasksId: parseInt($('#taskid').text()),
+                        RespondantName: user,
+                        Score: 5,
+                        IsComplete: true
+                    };
+                    console.log(taskResponse);
+                });
+        });
+
+
+
+
+
+</script>
+}

@@ -8,7 +8,7 @@
             <div class="d-flex align-items-end row">
                 <div class="col-sm-7">
                     <div class="card-body">
-                        <h5 class="card-title text-primary">Congratulations @User.Identity.Name! 🎉</h5>
+                        <h5 class="card-title text-primary">Congratulations <span id="userName">@User.Identity.Name</span>! 🎉</h5>
                         <p class="mb-4">
                             You have completed <span class="fw-bold">72%</span> of the Purchasing Process! Continue the steps to earn more points and badges.
                         </p>
@@ -508,192 +508,230 @@
 @section scripts{
     <partial name="_ValidationScriptsPartial" />
     <script type="text/javascript">
-        $(document).ready(function () {
+        $(document).ready(function() {
             var options = {
-          series: [
-          {
-            name: 'Actual',
-            data: [
-              {
-                x: 'step1',
-                y: 5,
-                goals: [
-                  {
-                    name: 'Expected',
-                    value: 10,
-                    strokeHeight: 5,
-                    strokeColor: '#775DD0'
-                  }
-                ]
-              },
-              {
-                x: 'step2',
-                y: 10,
-                goals: [
-                  {
-                    name: 'Expected',
-                    value: 10,
-                    strokeHeight: 5,
-                    strokeColor: '#775DD0'
-                  }
-                ]
-              },
-              {
-                x: 'step3',
-                y: 10,
-                goals: [
-                  {
-                    name: 'Expected',
-                    value: 10,
-                    strokeHeight: 5,
-                    strokeColor: '#775DD0'
-                  }
-                ]
-              },
-              {
-                x: 'step4',
-                y: 10,
-                goals: [
-                  {
-                    name: 'Expected',
-                    value: 10,
-                    strokeHeight: 5,
-                    strokeColor: '#775DD0'
-                  }
-                ]
-              },
-              {
-                x: 'step5',
-                y: 5,
-                goals: [
-                  {
-                    name: 'Expected',
-                    value: 10,
-                    strokeHeight: 13,
-                    strokeWidth: 0,
-                    strokeLineCap: 'round',
-                    strokeColor: '#775DD0'
-                  }
-                ]
-              },
-              {
-                x: 'step6',
-                y: 5,
-                goals: [
-                  {
-                    name: 'Expected',
-                    value: 10,
-                    strokeHeight: 5,
-                    strokeColor: '#775DD0'
-                  }
-                ]
-              },
-              {
-                x: 'step7',
-                y: 10,
-                goals: [
-                  {
-                    name: 'Expected',
-                    value: 10,
-                    strokeHeight: 5,
-                    strokeColor: '#775DD0'
-                  }
-                ]
-              },
-              {
-                x: 'step8',
-                y: 10,
-                goals: [
-                  {
-                    name: 'Expected',
-                    value: 10,
-                    strokeHeight: 2,
-                    strokeDashArray: 2,
-                    strokeColor: '#775DD0'
-                  }
-                ]
-              },
-              {
-                x: 'step9',
-                y: 5,
-                goals: [
-                  {
-                    name: 'Expected',
-                    value: 10,
-                    strokeHeight: 2,
-                    strokeDashArray: 2,
-                    strokeColor: '#775DD0'
-                  }
-                ]
-              },
-              {
-                x: 'step10',
-                y: 10,
-                goals: [
-                  {
-                    name: 'Expected',
-                    value: 10,
-                    strokeHeight: 2,
-                    strokeDashArray: 2,
-                    strokeColor: '#775DD0'
-                  }
-                ]
-              },
-              {
-                x: 'step11',
-                y: 5,
-                goals: [
-                  {
-                    name: 'Expected',
-                    value: 10,
-                    strokeHeight: 2,
-                    strokeDashArray: 2,
-                    strokeColor: '#775DD0'
-                  }
-                ]
-              },
-              {
-                x: 'step12',
-                y: 10,
-                goals: [
-                  {
-                    name: 'Expected',
-                    value: 10,
-                    strokeHeight: 2,
-                    strokeDashArray: 2,
-                    strokeColor: '#775DD0'
-                  }
-                ]
-              }
-            ]
-          }
-        ],
-          chart: {
-          height: 350,
-          type: 'bar'
-        },
-        plotOptions: {
-          bar: {
-            columnWidth: '60%'
-          }
-        },
-        colors: ['#00E396'],
-        dataLabels: {
-          enabled: false
-        },
-        legend: {
-          show: true,
-          showForSingleSeries: true,
-          customLegendItems: ['Actual', 'Expected'],
-          markers: {
-            fillColors: ['#00E396', '#775DD0']
-          }
-        }
-        };
+                series: [
+                    {
+                        name: 'Actual',
+                        data: [
+                            {
+                                x: 'step1',
+                                y: 5,
+                                goals: [
+                                    {
+                                        name: 'Expected',
+                                        value: 10,
+                                        strokeHeight: 5,
+                                        strokeColor: '#775DD0'
+                                    }
+                                ]
+                            },
+                            {
+                                x: 'step2',
+                                y: 10,
+                                goals: [
+                                    {
+                                        name: 'Expected',
+                                        value: 10,
+                                        strokeHeight: 5,
+                                        strokeColor: '#775DD0'
+                                    }
+                                ]
+                            },
+                            {
+                                x: 'step3',
+                                y: 10,
+                                goals: [
+                                    {
+                                        name: 'Expected',
+                                        value: 10,
+                                        strokeHeight: 5,
+                                        strokeColor: '#775DD0'
+                                    }
+                                ]
+                            },
+                            {
+                                x: 'step4',
+                                y: 10,
+                                goals: [
+                                    {
+                                        name: 'Expected',
+                                        value: 10,
+                                        strokeHeight: 5,
+                                        strokeColor: '#775DD0'
+                                    }
+                                ]
+                            },
+                            {
+                                x: 'step5',
+                                y: 5,
+                                goals: [
+                                    {
+                                        name: 'Expected',
+                                        value: 10,
+                                        strokeHeight: 13,
+                                        strokeWidth: 0,
+                                        strokeLineCap: 'round',
+                                        strokeColor: '#775DD0'
+                                    }
+                                ]
+                            },
+                            {
+                                x: 'step6',
+                                y: 5,
+                                goals: [
+                                    {
+                                        name: 'Expected',
+                                        value: 10,
+                                        strokeHeight: 5,
+                                        strokeColor: '#775DD0'
+                                    }
+                                ]
+                            },
+                            {
+                                x: 'step7',
+                                y: 10,
+                                goals: [
+                                    {
+                                        name: 'Expected',
+                                        value: 10,
+                                        strokeHeight: 5,
+                                        strokeColor: '#775DD0'
+                                    }
+                                ]
+                            },
+                            {
+                                x: 'step8',
+                                y: 10,
+                                goals: [
+                                    {
+                                        name: 'Expected',
+                                        value: 10,
+                                        strokeHeight: 2,
+                                        strokeDashArray: 2,
+                                        strokeColor: '#775DD0'
+                                    }
+                                ]
+                            },
+                            {
+                                x: 'step9',
+                                y: 5,
+                                goals: [
+                                    {
+                                        name: 'Expected',
+                                        value: 10,
+                                        strokeHeight: 2,
+                                        strokeDashArray: 2,
+                                        strokeColor: '#775DD0'
+                                    }
+                                ]
+                            },
+                            {
+                                x: 'step10',
+                                y: 10,
+                                goals: [
+                                    {
+                                        name: 'Expected',
+                                        value: 10,
+                                        strokeHeight: 2,
+                                        strokeDashArray: 2,
+                                        strokeColor: '#775DD0'
+                                    }
+                                ]
+                            },
+                            {
+                                x: 'step11',
+                                y: 5,
+                                goals: [
+                                    {
+                                        name: 'Expected',
+                                        value: 10,
+                                        strokeHeight: 2,
+                                        strokeDashArray: 2,
+                                        strokeColor: '#775DD0'
+                                    }
+                                ]
+                            },
+                            {
+                                x: 'step12',
+                                y: 10,
+                                goals: [
+                                    {
+                                        name: 'Expected',
+                                        value: 10,
+                                        strokeHeight: 2,
+                                        strokeDashArray: 2,
+                                        strokeColor: '#775DD0'
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                chart: {
+                    height: 350,
+                    type: 'bar'
+                },
+                plotOptions: {
+                    bar: {
+                        columnWidth: '60%'
+                    }
+                },
+                colors: ['#00E396'],
+                dataLabels: {
+                    enabled: false
+                },
+                legend: {
+                    show: true,
+                    showForSingleSeries: true,
+                    customLegendItems: ['Actual', 'Expected'],
+                    markers: {
+                        fillColors: ['#00E396', '#775DD0']
+                    }
+                }
+            };
 
-        var chart = new ApexCharts(document.querySelector("#charts"), options);
-        chart.render();
-})
+            var chart = new ApexCharts(document.querySelector("#charts"), options);
+            chart.render();
+        });
+
+        $(document).ready(function() {
+
+            var badges = 0;
+            var crown = 0;
+            var point = 0;
+
+            localStorage.setItem('badges', badges);
+            localStorage.setItem('crown', crown);
+            localStorage.setItem('point', point);
+
+             badges = localStorage.getItem('badges');
+             crown = localStorage.getItem('crown');
+             point = localStorage.getItem('point');
+
+            $('#badges').text(badges) ;
+            $('#crown').text(crown);
+            $('#point').text(point);
+
+
+            window.username = $('#userName').text();
+            var username = window.username;
+
+            localStorage.setItem("stat", username);
+            //alert(window.username);
+            $.ajax({
+                url:'Home/Index',
+                method:'POST',
+                data:{ username },
+                success:function(data) {
+                    console.log(data);
+                    $('#point').text(data.points);
+                }
+            });
+        });
+
+
+
 </script>
 }
 
