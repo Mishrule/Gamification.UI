@@ -3,35 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Gamification.UI.Migrations
 {
-    public partial class addedIdentity : Migration
+    public partial class InitialDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DeleteData(
-                table: "Tasks",
-                keyColumn: "Id",
-                keyValue: 1);
-
-            migrationBuilder.DeleteData(
-                table: "Tasks",
-                keyColumn: "Id",
-                keyValue: 2);
-
-            migrationBuilder.DeleteData(
-                table: "Tasks",
-                keyColumn: "Id",
-                keyValue: 3);
-
-            migrationBuilder.DeleteData(
-                table: "Tasks",
-                keyColumn: "Id",
-                keyValue: 4);
-
-            migrationBuilder.DeleteData(
-                table: "Tasks",
-                keyColumn: "Id",
-                keyValue: 5);
-
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -51,8 +26,6 @@ namespace Gamification.UI.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -71,6 +44,20 @@ namespace Gamification.UI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Scores",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Score = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Scores", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -179,6 +166,43 @@ namespace Gamification.UI.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Tasks",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StepNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TasksResponseId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tasks", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Responses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TasksId = table.Column<int>(type: "int", nullable: false),
+                    RespondantName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Score = table.Column<int>(type: "int", nullable: false),
+                    IsComplete = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Responses", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Responses_Tasks_TasksId",
+                        column: x => x.TasksId,
+                        principalTable: "Tasks",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -217,10 +241,32 @@ namespace Gamification.UI.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Responses_TasksId",
+                table: "Responses",
+                column: "TasksId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tasks_TasksResponseId",
+                table: "Tasks",
+                column: "TasksResponseId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Tasks_Responses_TasksResponseId",
+                table: "Tasks",
+                column: "TasksResponseId",
+                principalTable: "Responses",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Responses_Tasks_TasksId",
+                table: "Responses");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -237,22 +283,19 @@ namespace Gamification.UI.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Scores");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
-            migrationBuilder.InsertData(
-                table: "Tasks",
-                columns: new[] { "Id", "Description", "StepNumber" },
-                values: new object[,]
-                {
-                    { 1, "click on complete for 5 points double click for 10 points", "Step 1" },
-                    { 2, "click on complete for 5 points double click for 10 points", "Step 2" },
-                    { 3, "click on complete for 5 points double click for 10 points", "Step 3" },
-                    { 4, "click on complete for 5 points double click for 10 points", "Step 4" },
-                    { 5, "click on complete for 5 points double click for 10 points", "Step 5" }
-                });
+            migrationBuilder.DropTable(
+                name: "Tasks");
+
+            migrationBuilder.DropTable(
+                name: "Responses");
         }
     }
 }

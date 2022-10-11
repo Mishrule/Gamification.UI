@@ -35,6 +35,7 @@ namespace Gamification.UI.Data
 
         public DbSet<Tasks> Tasks { get; set; }
         public DbSet<TasksResponse> Responses { get; set; }
+        public DbSet<Scores> Scores { get; set; }
         // public DbSet<User> Users { get; set; }
     }
 

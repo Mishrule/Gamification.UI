@@ -21,6 +21,11 @@ namespace Gamification.UI.Services.Implementations
 	  return data;
 	}
 
+	public async Task<TasksResponse> GetTasksResponse(string username)
+	{
+		throw new System.NotImplementedException();
+	}
+
 	public async Task<IEnumerable<TasksResponse>> GetResponsePoint(string username)
 	{
 	  var data = await _db.Responses.Where(q => q.RespondantName == username).ToListAsync();
@@ -29,9 +34,40 @@ namespace Gamification.UI.Services.Implementations
 
 	public async Task<bool> CreateResponse(TasksResponse tasksResponse)
 	{
-	  await _db.Responses.AddAsync(tasksResponse);
+		var d = tasksResponse.Score;
+		var pushtoScore = new Scores
+		{
+			//Id = 0,
+			Username = tasksResponse.RespondantName,
+			//Score = tasksResponse.Score
+		};
+
+
+			var score = await _db.Scores.FirstOrDefaultAsync(q => q.Username == tasksResponse.RespondantName);
+		if (score == null)
+		{
+			
+			await _db.Scores.AddAsync(pushtoScore);
+		}
+		else
+		{
+			pushtoScore.Score = d + score.Score;
+			pushtoScore.Id = score.Id;
+			pushtoScore.Username = tasksResponse.RespondantName;
+			_db.Scores.Update(pushtoScore);
+		}
+
+
+		await _db.Responses.AddAsync(tasksResponse);
+		
 	  var save = await _db.SaveChangesAsync();
 	  return save > 0;
+	}
+
+	public async Task<IEnumerable<Scores>> GetLeaders()
+	{
+		var data = await _db.Scores.OrderByDescending(s => s.Score).ToListAsync();
+		return data;
 	}
 
 	//public async Task<int> GetLeaders()

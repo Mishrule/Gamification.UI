@@ -66,9 +66,10 @@ namespace Gamification.UI.Controllers
 	  return Ok(dataa);
 	}
 
-	public IActionResult LeaderBoard()
+	public async Task<IActionResult> LeaderBoard()
 	{
-	  return View();
+		var data = await _tasksServices.GetLeaders();
+	  return View(data);
 	}
 
 	public async Task<IActionResult> Tasks()
