@@ -20,7 +20,7 @@ namespace Gamification.UI.Configurations.Entities
 					LastName = "Admin",
 					UserName = "admin",
 					NormalizedUserName = "ADMIN",
-					PasswordHash = hasher.HashPassword(null, "Admin@Password1")
+					PasswordHash = hasher.HashPassword(null, "Password@1")
 				},
 				new ApplicationUser
 				{
@@ -31,7 +31,7 @@ namespace Gamification.UI.Configurations.Entities
 					LastName = "User",
 					UserName = "user",
 					NormalizedUserName = "USER",
-					PasswordHash = hasher.HashPassword(null, "User@Password1")
+					PasswordHash = hasher.HashPassword(null, "User@123")
 				}
 			);
 		}

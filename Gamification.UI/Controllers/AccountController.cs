@@ -30,6 +30,7 @@ namespace Gamification.UI.Controllers
             _roleManager = roleManager;
             _db = db;
         }
+        [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
             return View();
@@ -47,7 +48,7 @@ namespace Gamification.UI.Controllers
         public async Task<IActionResult> Login(LoginViewModel model, string returnurl = null)
         {
             ViewData["ReturnUrl"] = returnurl;
-            returnurl = returnurl ?? Url.Content("/Home/Index");
+            returnurl = returnurl ?? Url.Content("/Account/ResetPassword");
             if (ModelState.IsValid)
             {
                 var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, lockoutOnFailure: false);
@@ -72,7 +73,7 @@ namespace Gamification.UI.Controllers
         }
 
         [HttpGet]
-       // [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Register(string returnurl = null)
         {
             if (!await _roleManager.RoleExistsAsync("Admin"))
@@ -105,12 +106,12 @@ namespace Gamification.UI.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model, string returnurl = null)
         {
             ViewData["ReturnUrl"] = returnurl;
-            returnurl = returnurl ?? Url.Content("/Account/Register");
+            returnurl = returnurl ?? Url.Content("/Account/GetUsers");
 
             List<SelectListItem> listItems = new List<SelectListItem>();
             listItems.Add(new SelectListItem()
@@ -159,6 +160,7 @@ namespace Gamification.UI.Controllers
 
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetUsers()
         {
             var userList = _db.ApplicationUsers.ToList();
@@ -180,7 +182,7 @@ namespace Gamification.UI.Controllers
             return View(userList); ;
         }
 
-
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(string userId)
         {
             var objFromDb = _db.ApplicationUsers.FirstOrDefault(u => u.Id == userId);
@@ -205,6 +207,7 @@ namespace Gamification.UI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(ApplicationUser user)
         {
             if (ModelState.IsValid)
@@ -243,38 +246,35 @@ namespace Gamification.UI.Controllers
 
 
 
-        [HttpGet]
-        public async Task<IActionResult> Logout()
-        {
-            return View();
-        }
+        //[HttpGet]
+        //[Authorize(Roles = "Admin,User")]
+        //public async Task<IActionResult> Logout()
+        //{
+        //    return View();
+        //}
 
         [HttpPost]
-        public async Task<IActionResult> Logout(string returnUrl = null)
+        [Authorize(Roles = "Admin,User")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            if (returnUrl != null)
-            {
-                return LocalRedirect(returnUrl);
-            }
-            else
-            {
-                return RedirectToPage("/Account/Login");
-            }
-           // return LocalRedirect("/Account/Login");
+            return RedirectToAction(nameof(Login));
+
         }
 
        
 
         [HttpGet]
         [AllowAnonymous]
+        [Authorize(Roles = "Admin,User")]
         public IActionResult ResetPassword()
         {
             return View();
         }
 
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin,User")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
         {
@@ -299,8 +299,24 @@ namespace Gamification.UI.Controllers
             return View();
         }
 
+        [HttpPost]
+
+        [Authorize(Roles = "Admin")]
+        public IActionResult Delete(string userId)
+        {
+            var objFromDb = _db.ApplicationUsers.FirstOrDefault(u => u.Id == userId);
+            if (objFromDb == null)
+            {
+                return NotFound();
+            }
+            _db.ApplicationUsers.Remove(objFromDb);
+            _db.SaveChanges();
+            TempData[SD.Success] = "User deleted successfully.";
+            return RedirectToAction(nameof(GetUsers));
+        }
+
         [HttpGet]
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin,User")]
         public IActionResult ResetPasswordConfirmation()
         {
             return View();

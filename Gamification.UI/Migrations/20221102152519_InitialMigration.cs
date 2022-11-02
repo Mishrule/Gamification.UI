@@ -29,6 +29,7 @@ namespace Gamification.UI.Migrations
                     Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -211,17 +212,17 @@ namespace Gamification.UI.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "cac43a6e-f7bb-4448-baaf-1add431ccbbf", "566aae65-8c95-4b4f-9d1e-4fb25788cfbd", "User", "USER" },
-                    { "cbc43a8e-f7bb-4445-baaf-1add431ffbbf", "aed6933d-2e11-4dd8-bd75-4480645f8f89", "Administrator", "ADMINISTRATOR" }
+                    { "cac43a6e-f7bb-4448-baaf-1add431ccbbf", "8c7b6de9-701d-41e5-bdf8-5598fa4e0ff7", "User", "USER" },
+                    { "cbc43a8e-f7bb-4445-baaf-1add431ffbbf", "e53c21d5-8122-4f7e-be63-a7470131edc6", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "8e445865-a24d-4543-a6c6-9443d048cdb9", 0, "3c992abd-aebb-4d42-95f3-4fa8ef9fb416", "ApplicationUser", "admin@localhost.com", false, "System", "Admin", false, null, "ADMIN@LOCALHOST.COM", "ADMIN", "AQAAAAEAACcQAAAAEGNBNkiOCF2l3VjTkrQlNNhFZPEWMpipEY7DmAzlvb4um40lxJfUe9KkzQ0DvykgZA==", null, false, "78384d91-5745-468d-9ab9-e3c6f812c9a6", false, "admin" },
-                    { "9e224968-33e4-4652-b7b7-8574d048cdb9", 0, "5f588301-4e6b-49ee-bea1-0b7b83ae0d5b", "ApplicationUser", "user@localhost.com", false, "System", "User", false, null, "USER@LOCALHOST.COM", "USER", "AQAAAAEAACcQAAAAECwiD+XeitdABTEKhbaNA5LYFFVcmy/42qzRUhFrx1hO4KC/CFvvp8zGZ2g1HKPWvQ==", null, false, "11a1a651-7801-45b9-8082-a6e3699b2367", false, "user" }
+                    { "8e445865-a24d-4543-a6c6-9443d048cdb9", 0, "d49b75ba-78b5-4d72-905f-f28974a581e2", "ApplicationUser", "admin@localhost.com", false, "System", "Admin", false, null, null, "ADMIN@LOCALHOST.COM", "ADMIN", "AQAAAAEAACcQAAAAEFOLzE95ku5ZZIZ6bkEWOzo8ImZbwIDLQivA73D3Bq5KVQFDENym4W3yZstEREQ1pQ==", null, false, "bba81f47-327f-41af-9e4a-66088dc6f621", false, "admin" },
+                    { "9e224968-33e4-4652-b7b7-8574d048cdb9", 0, "305d0040-ddc2-41d3-8cf0-8673f3b27cb9", "ApplicationUser", "user@localhost.com", false, "System", "User", false, null, null, "USER@LOCALHOST.COM", "USER", "AQAAAAEAACcQAAAAEPUKZecsacfzMDYzF34i/opOn+2sQ9JG68u2NnCk9H6NpMZP+JGp8kmPMM+Nd09T7g==", null, false, "82074c9b-def8-48c0-896c-49b3452e1794", false, "user" }
                 });
 
             migrationBuilder.InsertData(

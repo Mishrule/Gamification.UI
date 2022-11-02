@@ -116,16 +116,16 @@ namespace Gamification.UI.Migrations
                         new
                         {
                             Id = "cac43a6e-f7bb-4448-baaf-1add431ccbbf",
-                            ConcurrencyStamp = "b0a66688-dc53-417c-af92-0715cbf05afa",
+                            ConcurrencyStamp = "8c7b6de9-701d-41e5-bdf8-5598fa4e0ff7",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
                             Id = "cbc43a8e-f7bb-4445-baaf-1add431ffbbf",
-                            ConcurrencyStamp = "033520fa-c753-4aaf-ac65-45ad3db07d78",
-                            Name = "Administrator",
-                            NormalizedName = "ADMINISTRATOR"
+                            ConcurrencyStamp = "e53c21d5-8122-4f7e-be63-a7470131edc6",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
                         });
                 });
 
@@ -336,15 +336,15 @@ namespace Gamification.UI.Migrations
                         {
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "507bd1f6-7965-4da7-8fdb-28023e707c90",
+                            ConcurrencyStamp = "d49b75ba-78b5-4d72-905f-f28974a581e2",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGJfd8t148iyGM+zg+4GKtSnY8Y6qAJzP2qphkKt51e6wTGaIlMp/iXEuTZkiSTGwg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFOLzE95ku5ZZIZ6bkEWOzo8ImZbwIDLQivA73D3Bq5KVQFDENym4W3yZstEREQ1pQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "fabe9ab6-8ba4-4834-8101-8fd96618e9f0",
+                            SecurityStamp = "bba81f47-327f-41af-9e4a-66088dc6f621",
                             TwoFactorEnabled = false,
                             UserName = "admin",
                             FirstName = "System",
@@ -354,15 +354,15 @@ namespace Gamification.UI.Migrations
                         {
                             Id = "9e224968-33e4-4652-b7b7-8574d048cdb9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "79d06374-ca6c-41ea-9df2-652ac242ea90",
+                            ConcurrencyStamp = "305d0040-ddc2-41d3-8cf0-8673f3b27cb9",
                             Email = "user@localhost.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@LOCALHOST.COM",
                             NormalizedUserName = "USER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJCkSC84BMa/Wom0yB1DWYH4QB3NMIe+fANGbXMj8BttSColRsXBamxZDVjiYI6sNQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPUKZecsacfzMDYzF34i/opOn+2sQ9JG68u2NnCk9H6NpMZP+JGp8kmPMM+Nd09T7g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e076dd2e-a149-42aa-a635-38696886ec3d",
+                            SecurityStamp = "82074c9b-def8-48c0-896c-49b3452e1794",
                             TwoFactorEnabled = false,
                             UserName = "user",
                             FirstName = "System",

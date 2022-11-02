@@ -1,5 +1,6 @@
-﻿@{
-    ViewData["Title"] = "Log out";
+﻿
+@{
+    ViewData["Title"] = "You are about to logout";
 }
 
 <header>
@@ -7,8 +8,7 @@
     @{
         if (User.Identity.IsAuthenticated)
         {
-            //<form class="form-inline" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Account/Login", new { area = "" })" method="post">
-            <form class="form-inline" asp-page="/Account/Logout" method="post">
+            <form class="form-inline" asp-controller="Account" asp-action="Logout" method="post">
                 <button type="submit" class="btn btn-link text-dark">Click here to Logout</button>
             </form>
         }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Gamification.UI.Controllers
 {
-  [Authorize]
+  [Authorize(Roles = "User")]
   public class HomeController : Controller
   {
 	private readonly ILogger<HomeController> _logger;
