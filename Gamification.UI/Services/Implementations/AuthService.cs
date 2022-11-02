@@ -24,7 +24,7 @@ namespace Gamification.UI.Services.Implementations
             throw new System.NotImplementedException();
         }
 
-        public Task<User> GetUserByUsername(string username)
+        public Task<ApplicationUser> GetUserByUsername(string username)
         {
             throw new System.NotImplementedException();
         }
@@ -45,7 +45,7 @@ namespace Gamification.UI.Services.Implementations
             return response;
         }
 
-        public Task<ServiceResponse<int>> Register(User user, string password)
+        public Task<ServiceResponse<int>> Register(ApplicationUser user, string password)
         {
             throw new System.NotImplementedException();
         }

@@ -84,6 +84,39 @@
                     <div data-i18n="Without menu">Task</div>
                 </a>
             </li>
+            <li class="menu-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
+                    <div data-i18n="Authentications">Authentications</div>
+                </a>
+                <ul class="menu-sub">
+                    @*<li class="menu-item">
+                        <a href="auth-login-basic.html" class="menu-link" target="_blank">
+                            <div data-i18n="Basic">Login</div>
+                        </a>
+                    </li>*@
+                    <li class="menu-item">
+                        <a asp-controller="Account" asp-action="Register" class="menu-link">
+                            <div data-i18n="Basic">Register</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a asp-controller="Account" asp-action="GetUsers"  class="menu-link">
+                            <div data-i18n="Basic">Users</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a asp-controller="Roles" asp-action="Index" class="menu-link">
+                            <div data-i18n="Basic">Roles</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a asp-controller="Account" asp-action="ResetPassword" class="menu-link">
+                            <div data-i18n="Basic">Reset Password</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
            @* <li class="menu-header small text-uppercase">
                 <span class="menu-header-text">User Account</span>
         </li>*@

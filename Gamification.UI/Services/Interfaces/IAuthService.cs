@@ -5,12 +5,12 @@ namespace Gamification.UI.Services.Interfaces
 {
     public interface IAuthService
     {
-        Task<ServiceResponse<int>> Register(User user, string password);
+        Task<ServiceResponse<int>> Register(ApplicationUser user, string password);
         Task<bool> UserExists(string username);
         Task<ServiceResponse<string>> Login(string username, string password);
         Task<ServiceResponse<bool>> ChangePassword(int userId, string newPassword);
         int GetUserId();
         string GetUserEmail();
-        Task<User> GetUserByUsername(string username);
+        Task<ApplicationUser> GetUserByUsername(string username);
     }
 }

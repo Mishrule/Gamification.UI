@@ -4,14 +4,16 @@ using Gamification.UI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Gamification.UI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221102011607_InitialMigration")]
+    partial class InitialMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -116,14 +118,14 @@ namespace Gamification.UI.Migrations
                         new
                         {
                             Id = "cac43a6e-f7bb-4448-baaf-1add431ccbbf",
-                            ConcurrencyStamp = "b0a66688-dc53-417c-af92-0715cbf05afa",
+                            ConcurrencyStamp = "566aae65-8c95-4b4f-9d1e-4fb25788cfbd",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
                             Id = "cbc43a8e-f7bb-4445-baaf-1add431ffbbf",
-                            ConcurrencyStamp = "033520fa-c753-4aaf-ac65-45ad3db07d78",
+                            ConcurrencyStamp = "aed6933d-2e11-4dd8-bd75-4480645f8f89",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
@@ -326,9 +328,6 @@ namespace Gamification.UI.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasDiscriminator().HasValue("ApplicationUser");
 
                     b.HasData(
@@ -336,15 +335,15 @@ namespace Gamification.UI.Migrations
                         {
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "507bd1f6-7965-4da7-8fdb-28023e707c90",
+                            ConcurrencyStamp = "3c992abd-aebb-4d42-95f3-4fa8ef9fb416",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGJfd8t148iyGM+zg+4GKtSnY8Y6qAJzP2qphkKt51e6wTGaIlMp/iXEuTZkiSTGwg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGNBNkiOCF2l3VjTkrQlNNhFZPEWMpipEY7DmAzlvb4um40lxJfUe9KkzQ0DvykgZA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "fabe9ab6-8ba4-4834-8101-8fd96618e9f0",
+                            SecurityStamp = "78384d91-5745-468d-9ab9-e3c6f812c9a6",
                             TwoFactorEnabled = false,
                             UserName = "admin",
                             FirstName = "System",
@@ -354,15 +353,15 @@ namespace Gamification.UI.Migrations
                         {
                             Id = "9e224968-33e4-4652-b7b7-8574d048cdb9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "79d06374-ca6c-41ea-9df2-652ac242ea90",
+                            ConcurrencyStamp = "5f588301-4e6b-49ee-bea1-0b7b83ae0d5b",
                             Email = "user@localhost.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@LOCALHOST.COM",
                             NormalizedUserName = "USER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJCkSC84BMa/Wom0yB1DWYH4QB3NMIe+fANGbXMj8BttSColRsXBamxZDVjiYI6sNQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECwiD+XeitdABTEKhbaNA5LYFFVcmy/42qzRUhFrx1hO4KC/CFvvp8zGZ2g1HKPWvQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e076dd2e-a149-42aa-a635-38696886ec3d",
+                            SecurityStamp = "11a1a651-7801-45b9-8082-a6e3699b2367",
                             TwoFactorEnabled = false,
                             UserName = "user",
                             FirstName = "System",

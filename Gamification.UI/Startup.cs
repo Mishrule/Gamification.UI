@@ -27,11 +27,16 @@ namespace Gamification.UI
                     options.UseSqlServer(
                             Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
-
+            //services.AddRazorPages();
             services.AddScoped<ITasksServices, TasksService>();
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
-                    .AddEntityFrameworkStores<ApplicationDbContext>();
+            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+            //        .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders().AddDefaultUI();
+            // services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+
+
+
             services.AddControllersWithViews();
         }
 
@@ -61,7 +66,7 @@ namespace Gamification.UI
             {
                 endpoints.MapControllerRoute(
                                     name: "default",
-                                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                                    pattern: "{controller=Account}/{action=Login}/{id?}");
                 endpoints.MapRazorPages();
             });
         }

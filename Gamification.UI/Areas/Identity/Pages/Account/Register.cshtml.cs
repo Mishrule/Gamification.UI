@@ -100,8 +100,8 @@ namespace Gamification.UI.Areas.Identity.Pages.Account
                     //	await _signInManager.SignInAsync(user, isPersistent: false);
                     //	return LocalRedirect(returnUrl);
                     //}
-                    await _signInManager.SignInAsync(user, isPersistent: true);
-                    return LocalRedirect(returnUrl);
+                    //await _signInManager.SignInAsync(user, isPersistent: false);
+                    return LocalRedirect("/Identity/Account/Register");
                 }
                 foreach (var error in result.Errors)
                 {

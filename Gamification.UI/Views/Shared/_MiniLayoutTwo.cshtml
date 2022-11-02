@@ -26,7 +26,7 @@
       href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
+
     <!-- Icons. Uncomment required icon fonts -->
     <link rel="stylesheet" href="~/assets/vendor/fonts/boxicons.css" />
 
@@ -39,6 +39,9 @@
     <link rel="stylesheet" href="~/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
 
     <link rel="stylesheet" href="~/assets/vendor/libs/apex-charts/apex-charts.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    
 
     <!-- Page CSS -->
 
@@ -62,7 +65,7 @@
         <!-- Layout container -->
         <div class="layout-page">
           <!-- Navbar -->
-          @await Html.PartialAsync("_NavBarView")
+          @*@await Html.PartialAsync("_NavBarView")*@
           
 
           <!-- / Navbar -->
@@ -102,12 +105,15 @@
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
   @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>*@
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  @*<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>*@
+  
     <script src="~/assets/vendor/libs/jquery/jquery.js"></script>
     <script src="~/assets/vendor/libs/popper/popper.js"></script>
     <script src="~/assets/vendor/js/bootstrap.js"></script>
-    <script src="~/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+  <script src="~/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    @*<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>*@
+
 
     <script src="~/assets/vendor/js/menu.js"></script>
     <!-- endbuild -->

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gamification.UI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221011163742_InitialDb")]
-    partial class InitialDb
+    [Migration("20221102092056_AddedName")]
+    partial class AddedName
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -113,6 +113,22 @@ namespace Gamification.UI.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "cac43a6e-f7bb-4448-baaf-1add431ccbbf",
+                            ConcurrencyStamp = "b0a66688-dc53-417c-af92-0715cbf05afa",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        },
+                        new
+                        {
+                            Id = "cbc43a8e-f7bb-4445-baaf-1add431ffbbf",
+                            ConcurrencyStamp = "033520fa-c753-4aaf-ac65-45ad3db07d78",
+                            Name = "Administrator",
+                            NormalizedName = "ADMINISTRATOR"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -149,6 +165,10 @@ namespace Gamification.UI.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -202,6 +222,8 @@ namespace Gamification.UI.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -231,12 +253,10 @@ namespace Gamification.UI.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -265,6 +285,18 @@ namespace Gamification.UI.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "8e445865-a24d-4543-a6c6-9443d048cdb9",
+                            RoleId = "cbc43a8e-f7bb-4445-baaf-1add431ffbbf"
+                        },
+                        new
+                        {
+                            UserId = "9e224968-33e4-4652-b7b7-8574d048cdb9",
+                            RoleId = "cac43a6e-f7bb-4448-baaf-1add431ccbbf"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -273,12 +305,10 @@ namespace Gamification.UI.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -286,6 +316,60 @@ namespace Gamification.UI.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Gamification.UI.Models.ApplicationUser", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasDiscriminator().HasValue("ApplicationUser");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "507bd1f6-7965-4da7-8fdb-28023e707c90",
+                            Email = "admin@localhost.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@LOCALHOST.COM",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGJfd8t148iyGM+zg+4GKtSnY8Y6qAJzP2qphkKt51e6wTGaIlMp/iXEuTZkiSTGwg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "fabe9ab6-8ba4-4834-8101-8fd96618e9f0",
+                            TwoFactorEnabled = false,
+                            UserName = "admin",
+                            FirstName = "System",
+                            LastName = "Admin"
+                        },
+                        new
+                        {
+                            Id = "9e224968-33e4-4652-b7b7-8574d048cdb9",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "79d06374-ca6c-41ea-9df2-652ac242ea90",
+                            Email = "user@localhost.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "USER@LOCALHOST.COM",
+                            NormalizedUserName = "USER",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJCkSC84BMa/Wom0yB1DWYH4QB3NMIe+fANGbXMj8BttSColRsXBamxZDVjiYI6sNQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "e076dd2e-a149-42aa-a635-38696886ec3d",
+                            TwoFactorEnabled = false,
+                            UserName = "user",
+                            FirstName = "System",
+                            LastName = "User"
+                        });
                 });
 
             modelBuilder.Entity("Gamification.UI.Data.Tasks", b =>

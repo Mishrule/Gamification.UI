@@ -1,17 +1,27 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Gamification.UI.Models
 {
-    public class UserRegister
+    public class RegisterViewModel
     {
         [Required]
         public string Username { get; set; }
+        [Required]
+        public string Name { get; set; }
         [Required, EmailAddress]
         public string Email { get; set; } = string.Empty;
         [Required, StringLength(100, MinimumLength = 6)]
+
+        [DataType(DataType.Password)]
         public string Password { get; set; } = string.Empty;
         [Compare("Password", ErrorMessage = "The passwords do not match.")]
+
+        [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; } = string.Empty;
+        public IEnumerable<SelectListItem> RoleList { get; set; }
+        public string RoleSelected { get; set; }
 
     }
 }
