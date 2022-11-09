@@ -10,7 +10,12 @@
     {
     <!-- Basic Bootstrap Table -->
     <div class="card">
-      <h5 class="card-header">User List</h5>
+        <h5 class="card-header">User List  
+            <div class="form-group m-2">
+          <div class="col-md-2">
+              <a asp-controller="Home" asp-action="Index" class="btn btn-success btn-outline-info form-control">Go Home</a>
+          </div>
+      </div></h5>
         <div class="card-body">
             <div class="table-responsive text-nowrap">
                 <table class="table" id="usersTable">

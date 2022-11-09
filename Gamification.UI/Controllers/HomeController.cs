@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Gamification.UI.Controllers
 {
-  [Authorize(Roles = "User")]
+  [Authorize]
   public class HomeController : Controller
   {
 	private readonly ILogger<HomeController> _logger;
@@ -91,8 +91,13 @@ namespace Gamification.UI.Controllers
 	  return View();
 	}
 
+	public IActionResult Badges()
+	{
 
-	public IActionResult Privacy()
+		return View();
+	}
+
+		public IActionResult Privacy()
 	{
 	  return View();
 	}
