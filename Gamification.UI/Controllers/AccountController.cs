@@ -42,6 +42,13 @@ namespace Gamification.UI.Controllers
             ViewData["ReturnUrl"] = returnurl;
             return View();
         }
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult InitialPage(/*string returnurl = null*/)
+        {
+            //ViewData["ReturnUrl"] = returnurl;
+            return View();
+        }
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -51,7 +58,7 @@ namespace Gamification.UI.Controllers
             returnurl = returnurl ?? Url.Content("/Account/ResetPassword");
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(model.UserId, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     return LocalRedirect(returnurl);
