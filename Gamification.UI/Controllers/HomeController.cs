@@ -1,11 +1,15 @@
-﻿using Gamification.UI.Data;
+﻿using System;
+using Gamification.UI.Data;
 using Gamification.UI.Models;
 using Gamification.UI.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
+using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 
 namespace Gamification.UI.Controllers
 {
@@ -14,16 +18,36 @@ namespace Gamification.UI.Controllers
   {
 	private readonly ILogger<HomeController> _logger;
 	private readonly ITasksServices _tasksServices;
+	private readonly HttpClient _client;
+	private readonly IConfiguration _configuration;
+	public string Base { get; set; }
 
-	public HomeController(ILogger<HomeController> logger, ITasksServices tasksServices)
+		public HomeController(ILogger<HomeController> logger, ITasksServices tasksServices, HttpClient client, IConfiguration configuration)
 	{
 	  _tasksServices = tasksServices;
-	  _logger = logger;
+	  _client = client;
+	  _configuration = configuration;
+	  Base = _configuration.GetValue<string>("APIKey");
+			_logger = logger;
 	}
 
-	public IActionResult Index()
+	public async Task<ActionResult> Index()
 	{
-	  return View();
+		try
+		{
+			//var response = await _client.GetFromJsonAsync<object>($"/MMSet(Id=2,User='LEARN-031')?$format=json&sap-client=111");
+			//ViewBag.Err = response;
+			//Console.WriteLine(response);
+			return View();
+			}
+		catch (Exception e)
+		{
+			Console.WriteLine(e);
+			throw;
+		}
+		
+
+			
 	}
 	[HttpPost]
 	public async Task<IActionResult> Index(string username)

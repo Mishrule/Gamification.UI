@@ -42,6 +42,31 @@ namespace Gamification.UI.Controllers
             ViewData["ReturnUrl"] = returnurl;
             return View();
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult AdminLogin(string returnurl = null)
+        {
+            ViewData["ReturnUrl"] = returnurl;
+            return View();
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult LoginAS(string appuser)
+        {
+            if (appuser == "sysuser")
+            {
+                return View("Login");
+            }
+            else
+            {
+                return View("AdminView");
+            }
+            
+            
+        }
+
         [HttpGet]
         [AllowAnonymous]
         public IActionResult InitialPage(/*string returnurl = null*/)
@@ -64,6 +89,36 @@ namespace Gamification.UI.Controllers
                     return LocalRedirect(returnurl);
                 }
                 
+                //if (result.IsLockedOut)
+                //{
+                //    return View("Lockout");
+                //}
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    return View(model);
+                }
+            }
+
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AdminLogin(LoginViewModel model, string returnurl = null)
+        {
+            ViewData["ReturnUrl"] = returnurl;
+            returnurl = returnurl ?? Url.Content("/Account/ResetPassword");
+            if (ModelState.IsValid)
+            {
+                var result = await _signInManager.PasswordSignInAsync(model.UserId, model.Password, model.RememberMe, lockoutOnFailure: false);
+                if (result.Succeeded)
+                {
+                    return LocalRedirect(returnurl);
+                }
+
                 //if (result.IsLockedOut)
                 //{
                 //    return View("Lockout");
@@ -266,7 +321,7 @@ namespace Gamification.UI.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction(nameof(Login));
+            return RedirectToAction(nameof(InitialPage));
 
         }
 

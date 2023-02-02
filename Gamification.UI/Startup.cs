@@ -1,6 +1,7 @@
 using Gamification.UI.Data;
 using Gamification.UI.Services.Implementations;
 using Gamification.UI.Services.Interfaces;
+using Humanizer.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -8,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Net.Http;
+using System;
 
 namespace Gamification.UI
 {
@@ -29,6 +32,7 @@ namespace Gamification.UI
             services.AddDatabaseDeveloperPageExceptionFilter();
             //services.AddRazorPages();
             services.AddScoped<ITasksServices, TasksService>();
+            services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(Configuration.GetValue<string>("APIKey")) });
 
             //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
             //        .AddEntityFrameworkStores<ApplicationDbContext>();

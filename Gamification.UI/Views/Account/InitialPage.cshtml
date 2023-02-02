@@ -129,11 +129,11 @@
                   </button>
                   <ul class="dropdown-menu" style="width: 100%">
                   
-                    <li><a class="dropdown-item user" id="sysuser">User</a></li>
+                    <li><a asp-controller="Account" asp-action="Login"  class="dropdown-item user" id="sysuser">User</a></li>
                     <li>
                       <hr class="dropdown-divider">
                     </li>
-                    <li><a class="dropdown-item user" id="sysadmin">Administrator</a></li>
+                    <li><a asp-controller="Account" asp-action="AdminLogin" class="dropdown-item user" id="sysadmin">Administrator</a></li>
                   </ul>
                 </div>
               </div>
@@ -159,12 +159,22 @@
   <script src="~/assets/vendor/js/bootstrap.js"></script>
 <script src="~/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 <script>
-  $(document).ready(function() {
-    $('.user').click(function() {
-      var appuser = $(this).attr("id");
-      alert(appuser);
-    });
-  });
+  //$(document).ready(function() {
+  //  $('.user').click(function() {
+  //    var appuser = $(this).attr("id");
+  //    $.ajax({
+  //              url: '/Account/LoginAS',
+  //      method: 'POST',
+  //      data: { appuser },
+  //      success: function(data) {
+  //        console.log(data);
+  //        // $('#point').text(data.points);
+  //        // window.location.reload();
+  //        //window.location.href = '/Home/Index';
+  //      }
+  //    });
+  //  });
+  //});
 </script>
 
   <script src="~/assets/vendor/js/menu.js"></script>
