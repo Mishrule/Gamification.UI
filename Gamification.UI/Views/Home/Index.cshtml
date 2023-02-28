@@ -9,11 +9,11 @@
             <div class="d-flex align-items-end row">
                 <div class="col-sm-7">
                     <div class="card-body">
-                        @*<h5 class="card-title text-primary">Congratulations <span id="userName">@User.Identity.Name</span>! 🎉</h5>*@
-                        <h5 class="card-title text-primary">Congratulations <span @*id="userName"*@>@Model.Data.User</span>! 🎉</h5>
+                            @*<h5 class="card-title text-primary">Congratulations <span id="userName">@Model.Data.User</span>! 🎉</h5>*@
+                <h5 class="card-title text-primary">Congratulations <span @*id="userName"*@>@User.Identity.Name</span>! 🎉</h5>
                         <p class="mb-4">
 
-                  You have completed <span class="fw-bold"@* id="pTitle"*@>@Model.Data.FulfillmentAll%</span> of the Purchasing Process! Continue the steps to earn more points and badges.
+                  You have completed <span class="fw-bold"@* id="pTitle"*@></span> of the Purchasing Process! Continue the steps to earn more points and badges.
                         </p>
                         <a href="javascript:;" class="btn btn-sm btn-outline-primary">Back to SAP</a>
                     </div>
@@ -59,7 +59,7 @@
                             </div>*@
                         </div>
                         <span class="fw-semibold d-block mb-1">Points</span>
-                <h3 class="card-title mb-2"><span @*id="pPoint"*@>@Model.Data.Badge</span></h3>
+                <h3 class="card-title mb-2"><span @*id="pPoint"*@>@ViewBag.Point</span></h3>
                         <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> next step +5</small>
                     </div>
                 </div>
@@ -87,7 +87,7 @@
                             </div>*@
                         </div>
                         <span>Badges</span>
-                        <h3 class="card-title text-nowrap mb-1"><span @*id="pBadge"*@>@Model.Data.Badge</span></h3>
+                        <h3 class="card-title text-nowrap mb-1"><span @*id="pBadge"*@>@*@Model.Data.Badge*@</span></h3>
                         <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i>next step +5</small>
                     </div>
                 </div>
@@ -269,7 +269,7 @@ else
                                 goals: [
                                     {
                                         name: 'Expected',
-                                        value: 10,
+                                        value: 5,
                                         strokeHeight: 5,
                                         strokeColor: '#775DD0'
                                     }
