@@ -29,32 +29,47 @@ namespace Gamification.UI.Controllers
 	private readonly ITasksServices _tasksServices;
 	private readonly HttpClient _client;
 	private readonly IConfiguration _configuration;
-	public string Base { get; set; }
+	private readonly ApplicationDbContext _db;
+		public string Base { get; set; }
 
 	public HomeController(ILogger<HomeController> logger, ITasksServices tasksServices, HttpClient client,
-		IConfiguration configuration)
+		IConfiguration configuration, ApplicationDbContext db)
 	{
 		_tasksServices = tasksServices;
 		_client = client;
 		_configuration = configuration;
+		_db = db;
 		//Base = _configuration.GetValue<string>("APIKey");
 		_logger = logger;
 	}
 
 	public String GetUrl(int clientId, String userId, String applicationServer)
 	{
-	  return	$"https://{applicationServer}/sap/opu/odata/sap/ZUCC_GBM_SRV/MM_FSet(Id=2,User='{userId}')?$format=json&sap-client={clientId}";
+		
+	  return	$"https://{applicationServer.Trim()}/sap/opu/odata/sap/ZUCC_GBM_SRV/MM_FSet(Id=2,User='{userId.ToUpper().Trim()}')?$format=json&sap-client={clientId}";
 	}
 
 
-	public async Task<ActionResult> Index(int clientId, String userId, String applicationServer)
+	public async Task<ActionResult> Index(/*int clientId, String userId, String applicationServer*/)
 	{
 		try
-			{
-				
+		{
+			var userInfo = new ApplicationUser();
+
+				var userList = _db.ApplicationUsers.ToList().Where(q=>q.UserId == HttpContext.User.Identity.Name.ToUpper());
+				foreach (var data in userList)
+				{
+				   userInfo =	new ApplicationUser()
+					{
+						ApplicationServer = data.ApplicationServer,
+						ClientId = data.ClientId,
+						UserId = data.UserId
+					};
+				}
 				var userName = "eadeborna";
 				var passwd = "Gamification123";
-				var url = GetUrl(clientId, userId, applicationServer);
+
+				var url = GetUrl(userInfo.ClientId, userInfo.UserId, userInfo.ApplicationServer);
 
 				// use this handler to allow untrusted SSL Certificates
 				var handler = new HttpClientHandler();
