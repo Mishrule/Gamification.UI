@@ -192,7 +192,15 @@ namespace Gamification.UI.Controllers
 
             if (ModelState.IsValid && model.RoleSelected != null)
             {
-                var user = new ApplicationUser { UserName = model.Username, Email = model.Email, Name = model.Name };
+                var user = new ApplicationUser {  
+                    UserName = model.Username, 
+                    Email = model.Email,
+                    Name = model.Name, 
+                    ApplicationServer = model.ApplicationServer,
+                    ClientId = model.ClientId,
+                    UserId = model.UserId
+
+                };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

@@ -20,6 +20,9 @@ namespace Gamification.UI.Configurations.Entities
 					LastName = "Admin",
 					UserName = "admin",
 					NormalizedUserName = "ADMIN",
+					ApplicationServer = "e45z.4.ucc.md/sap",
+					ClientId = 111,
+					UserId = "Learn-031",
 					PasswordHash = hasher.HashPassword(null, "Password@1")
 				},
 				new ApplicationUser
@@ -31,6 +34,9 @@ namespace Gamification.UI.Configurations.Entities
 					LastName = "User",
 					UserName = "user",
 					NormalizedUserName = "USER",
+					ApplicationServer = "e45z.4.ucc.md/sap",
+					ClientId = 111,
+					UserId = "Learn-031",
 					PasswordHash = hasher.HashPassword(null, "User@123")
 				}
 			);

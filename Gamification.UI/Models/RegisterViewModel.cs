@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Gamification.UI.Models
@@ -10,7 +11,18 @@ namespace Gamification.UI.Models
         public string Username { get; set; }
         [Required]
         public string Name { get; set; }
+
+        [Required] public string UserId { get; set; }
+
+        [Required]
+        [DisplayName("Application Server")]
+        public string ApplicationServer { get; set; }
+
+        [Required] 
+        public int ClientId { get; set; }
+
         [Required, EmailAddress]
+
         public string Email { get; set; } = string.Empty;
         [Required, StringLength(100, MinimumLength = 6)]
 
