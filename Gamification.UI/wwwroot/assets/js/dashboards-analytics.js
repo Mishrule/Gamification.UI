@@ -274,12 +274,18 @@
     totalRevenueChart.render();
   }
 
+  var ful = $('#fulFillment').text();
+  var fulfill = parseInt(ful);
+  console.log(fulfill);
+
   // Growth Chart - Radial Bar Chart
   // --------------------------------------------------------------------
   const growthChartEl = document.querySelector('#growthChart'),
+  
+  
     growthChartOptions = {
-      series: [78],
-      labels: ['Growth'],
+      series: [fulfill],
+      labels: ['Progress'],
       chart: {
         height: 240,
         type: 'radialBar'
