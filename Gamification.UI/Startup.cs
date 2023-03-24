@@ -70,8 +70,8 @@ namespace Gamification.UI
             {
                 endpoints.MapControllerRoute(
                                     name: "default",
-                                    //pattern: "{controller=Account}/{action=Login}/{id?}");
-                                    pattern: "{controller=Account}/{action=InitialPage}/{id?}");
+                                    pattern: "{controller=Account}/{action=Login}/{id?}");
+                                   // pattern: "{controller=Account}/{action=InitialPage}/{id?}");
                 endpoints.MapRazorPages();
             });
         }

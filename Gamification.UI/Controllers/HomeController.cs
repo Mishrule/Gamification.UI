@@ -124,6 +124,7 @@ namespace Gamification.UI.Controllers
 			int point = 0;
 			int level = 0;
 			string fulfill = "";
+			string badge = "";
 			List<int> Points = new List<int>();
 			foreach (var item in dictionaryList)
 			{
@@ -148,6 +149,10 @@ namespace Gamification.UI.Controllers
 				{
 					level = int.Parse(item.Value);
 				}
+				if (item.Key.Equals("Badge"))
+				{
+					badge = item.Value;
+				}
 			}
 
 			// ful
@@ -156,10 +161,11 @@ namespace Gamification.UI.Controllers
 			//ViewBag.Point = Points.Sum();
 			ViewBag.Point = point;
 			ViewBag.Levels = level;
+			ViewBag.Badge = badge;
 
 
-				
-			return View();
+
+				return View();
 		}
 		catch (Exception e)
 		{
@@ -238,6 +244,7 @@ namespace Gamification.UI.Controllers
 			int point = 0;
 			int level = 0;
 			string fulfill = "";
+			string badge = "";
 			List<int> Points = new List<int>();
 			foreach (var item in dictionaryList)
 			{
@@ -256,6 +263,10 @@ namespace Gamification.UI.Controllers
 				{
 					level = int.Parse(item.Value);
 				}
+				if (item.Key.Equals("Badge"))
+				{
+					badge = item.Value;
+				}
 			}
 
 			// ful
@@ -265,9 +276,12 @@ namespace Gamification.UI.Controllers
 			ViewBag.Point = point;
 			ViewBag.Levels = level;
 
+			ViewBag.Badge = badge;
 
 
-			return View();
+
+
+				return View();
 		}
 		catch (Exception e)
 		{

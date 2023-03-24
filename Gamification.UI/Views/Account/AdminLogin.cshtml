@@ -140,14 +140,14 @@
 
               <form asp-controller="Account" asp-action="AdminLogin" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" role="form" class="mb-3">
                 <div asp-validation-summary="All" class="text-danger"></div>
-                <div class="mb-3" hidden>
+               @* <div class="mb-3" hidden>
                   <label for="ApplicationServer" class="form-label">Application Server</label>
                   <input asp-for="ApplicationServer" class="form-control" value="applicationserver" />
                 </div>
               <div class="mb-3" hidden>
                   <label for="ClientId" class="form-label">Client ID</label>
                 <input asp-for="ClientId" class="form-control" value="0" />
-                </div>
+                </div>*@
                   <div class="mb-3">
                       <label for="UserId" class="form-label">User ID</label>
                 <input asp-for="UserId" class="form-control" />

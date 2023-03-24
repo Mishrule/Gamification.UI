@@ -7,12 +7,12 @@ namespace Gamification.UI.Models
     {
         [Required] public string UserId { get; set; }
 
-        [Required]
-        [DisplayName("Application Server")]
-        public string ApplicationServer { get; set; }
+        //[Required]
+        //[DisplayName("Application Server")]
+        //public string ApplicationServer { get; set; }
 
-        [Required] 
-        public int ClientId { get; set; }
+        //[Required] 
+        //public int ClientId { get; set; }
 
         [Required]
         [DataType(DataType.Password)]

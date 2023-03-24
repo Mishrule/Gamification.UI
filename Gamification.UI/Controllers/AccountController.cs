@@ -103,7 +103,7 @@ namespace Gamification.UI.Controllers
 
             return View(model);
         }
-
+        /*
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -133,7 +133,7 @@ namespace Gamification.UI.Controllers
 
             return View(model);
         }
-
+        */
         [HttpGet]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Register(string returnurl = null)

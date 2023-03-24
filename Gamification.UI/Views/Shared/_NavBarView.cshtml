@@ -46,17 +46,17 @@
 
                 <li class="nav-item lh-1 me-3">
                     <button type="button" class="btn rounded-pill btn-outline-primary btn-sm">
-                        <span class="tf-icons bx bxs-star-half"></span>&nbsp; Points &nbsp;<span class="badge rounded-pill"><span id="point"></span></span>
+                        <span class="tf-icons bx bxs-star-half"></span>&nbsp; Points &nbsp;<span class="rounded-pill"><span id="aPoint"></span></span>
                     </button>
                 </li>
                 <li class="nav-item lh-1 me-3">
                     <button type="button" class="btn rounded-pill btn-outline-primary btn-sm">
-                        <span class="tf-icons bx bxs-badge"></span>&nbsp; Badge &nbsp;<span class="badge rounded-pill"><span id = "badges"></span></span>
+                        <span class="tf-icons bx bxs-badge"></span>&nbsp; Badges &nbsp;<span class="rounded-pill"><span id="aBadge"></span></span>
                     </button>
                 </li>
                 <li class="nav-item lh-1 me-3">
                     <button type="button" class="btn rounded-pill btn-outline-primary btn-sm">
-                        <span class="tf-icons bx bxs-crown"></span>&nbsp; Crown &nbsp;<span class="badge rounded-pill"><span id = "crown"></span></span>
+                        <span class="tf-icons bx bxs-crown"></span>&nbsp; Levels &nbsp;<span class="rounded-pill"><span id="aLevel"></span></span>
                     </button>
                 </li>
            
@@ -123,33 +123,34 @@
         }
     </div>
 </nav>
-@*@section scripts{
+@section scripts{
     <partial name="_ValidationScriptsPartial" />
     <script type="text/javascript">
       
         $(document).ready(function() {
+            //alert(33);
+            
+            //$('#aBadge').text(window.badges);
+            //$('#aLevel').text(window.levels);
+            //$('#aPoint').text(window.points);
 
-            $('#badges').text('0');
-            $('#crown').text('0');
-            $('#point').text('0');
 
 
-
-            window.username = $('#userName').text();
-            var username = window.username;
-            alert(window.username);
-            $.ajax({
-                url:'Home/Index',
-                method:'POST',
-                data:{ username },
-                success:function(data) {
-                    console.log(data);
-                    $('#point').text(data.points);
-                }
-            });
-        });
+        //    window.username = $('#userName').text();
+        //    var username = window.username;
+        //    alert(window.username);
+        //    $.ajax({
+        //        url:'Home/Index',
+        //        method:'POST',
+        //        data:{ username },
+        //        success:function(data) {
+        //            console.log(data);
+        //            $('#point').text(data.points);
+        //        }
+        //    });
+        //});
 
 
 
 </script>
-}*@
+}
