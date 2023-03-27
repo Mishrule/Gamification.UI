@@ -4,14 +4,16 @@ using Gamification.UI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Gamification.UI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230326234910_AddedLeaderBoard")]
+    partial class AddedLeaderBoard
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -96,7 +98,7 @@ namespace Gamification.UI.Migrations
                     b.Property<string>("CaseStudy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Point")
+                    b.Property<int>("Point")
                         .HasColumnType("int");
 
                     b.Property<string>("Username")
@@ -137,14 +139,14 @@ namespace Gamification.UI.Migrations
                         new
                         {
                             Id = "cac43a6e-f7bb-4448-baaf-1add431ccbbf",
-                            ConcurrencyStamp = "a17d64c5-d3b5-40cd-af2f-04386a783a1a",
+                            ConcurrencyStamp = "18db18c8-ccf9-4742-8d36-0b1dabafd970",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
                             Id = "cbc43a8e-f7bb-4445-baaf-1add431ffbbf",
-                            ConcurrencyStamp = "596c46d2-9546-438b-9d82-03ad2002fe7d",
+                            ConcurrencyStamp = "9bada91b-b41e-49d3-ba11-f5f44daca066",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -368,15 +370,15 @@ namespace Gamification.UI.Migrations
                         {
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "776271d5-eab9-4283-a5c3-5e516fce02fb",
+                            ConcurrencyStamp = "44187eea-3cd6-4342-b8a2-9ee52567beb7",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEH09C2/lRxNhBw8hKrP8A8o3yzRUXY55+ZFZb3FTayvzbuOP4naWm9lA1gQW47MxUQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFFaPLcnRuMtDXVXZLlOsYYSTlHBqMm4M2Tj/PCOFH32AJ7+XH5e470ukL7xXbJasg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "70a3c9ec-46eb-4ad2-9832-d98864db8a12",
+                            SecurityStamp = "0e2ac0e3-d5c8-4e9c-b55a-4c2adcff57ce",
                             TwoFactorEnabled = false,
                             UserName = "admin",
                             ApplicationServer = "e45z.4.ucc.md/sap",
@@ -389,15 +391,15 @@ namespace Gamification.UI.Migrations
                         {
                             Id = "9e224968-33e4-4652-b7b7-8574d048cdb9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6ddf598f-57fa-4288-a9f7-9fd0f2f01334",
+                            ConcurrencyStamp = "b0783538-24ff-462c-aec2-be1286231644",
                             Email = "user@localhost.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@LOCALHOST.COM",
                             NormalizedUserName = "USER",
-                            PasswordHash = "AQAAAAEAACcQAAAAECGZC0tB741pd5ISdFhSN2I4SwZfRPZzzaT9pEs8bT0cINboVUTBDAq+7aelAGuqtQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEM5McagOe+v22v2/awBh5elrqUjqZ8kyhBP5HKWUTHzRNSfQH3mISIHbj2OuZGHKcA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7500f7f6-3504-40f1-b220-133f886b4315",
+                            SecurityStamp = "ab43f5ec-ea35-4fac-923b-01bdd0edc895",
                             TwoFactorEnabled = false,
                             UserName = "user",
                             ApplicationServer = "e45z.4.ucc.md/sap",

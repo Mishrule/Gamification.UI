@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Gamification.UI.Models;
 
 namespace Gamification.UI.Services.Implementations
 {
@@ -75,9 +76,9 @@ namespace Gamification.UI.Services.Implementations
 			return save > 0;
 		}
 
-		public async Task<IEnumerable<Scores>> GetLeaders()
+		public async Task<IEnumerable<LeaderBoader>> GetLeaders(string caseStudy)
 		{
-			var data = await _db.Scores.OrderByDescending(s => s.Score).ToListAsync();
+			var data = await _db.LeaderBoaders.OrderByDescending(s => s.Point).Where(c=>c.CaseStudy == caseStudy).ToListAsync();
 			return data;
 		}
 

@@ -1,6 +1,7 @@
 ﻿using Gamification.UI.Data;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Gamification.UI.Models;
 
 namespace Gamification.UI.Services.Interfaces
 {
@@ -10,6 +11,6 @@ namespace Gamification.UI.Services.Interfaces
 	Task<TasksResponse> GetTasksResponse(string username);
 	Task<IEnumerable<TasksResponse>> GetResponsePoint(string username);
 	Task<bool> CreateResponse(TasksResponse tasksResponse);
-	Task<IEnumerable<Scores>> GetLeaders();
+	public Task<IEnumerable<LeaderBoader>> GetLeaders(string caseStudy);
   }
 }

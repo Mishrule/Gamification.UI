@@ -19,6 +19,7 @@ using Newtonsoft.Json.Linq;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.Intrinsics.X86;
+using Microsoft.EntityFrameworkCore;
 
 namespace Gamification.UI.Controllers
 {
@@ -30,7 +31,7 @@ namespace Gamification.UI.Controllers
 	private readonly HttpClient _client;
 	private readonly IConfiguration _configuration;
 	private readonly ApplicationDbContext _db;
-		public string Base { get; set; }
+	public string _caseStudy { get; set; }
 
 	public HomeController(ILogger<HomeController> logger, ITasksServices tasksServices, HttpClient client,
 		IConfiguration configuration, ApplicationDbContext db)
@@ -39,7 +40,7 @@ namespace Gamification.UI.Controllers
 		_client = client;
 		_configuration = configuration;
 		_db = db;
-		//Base = _configuration.GetValue<string>("APIKey");
+		//_caseStudy = caseStudy;
 		_logger = logger;
 	}
 
@@ -51,6 +52,7 @@ namespace Gamification.UI.Controllers
 	
 	public String GetUrl(int clientId, String userId, String applicationServer, string caseStudy = "MM")
 	{
+		_caseStudy = caseStudy;
 				return $"https://{applicationServer.Trim()}/sap/opu/odata/sap/ZUCC_GBM_GM_SRV/{caseStudy}_FSet(Id=2,User='{userId.ToUpper().Trim()}')?$format=json&sap-client={clientId}";
 			//return $"https://{applicationServer.Trim()}/sap/opu/odata/sap/ZUCC_GBM_SRV/MM_FSet(Id=2,User='{userId.ToUpper().Trim()}')?$format=json&sap-client={clientId}";
 	}
@@ -104,13 +106,13 @@ namespace Gamification.UI.Controllers
 
 			var PiontsDictionary = new Dictionary<string, int>()
 			{
-				{"@08@", 10},
-				{"@09@", 8},
+				{"@08@10", 10},
+				{"@09@7", 8},
 				{"@0A@", 7 },
-				{"", 0}
+				{"0", 0}
 			};
 
-			foreach (var property in jToken.Children<JProperty>())
+				foreach (var property in jToken.Children<JProperty>())
 			{
 				var dictionaryModel = new DictionaryModel
 				{
@@ -120,50 +122,76 @@ namespace Gamification.UI.Controllers
 				dictionaryList.Add(dictionaryModel);
 			}
 
-			// Get points for that specific learn id
-			int point = 0;
-			int level = 0;
-			string fulfill = "";
-			string badge = "";
-			List<int> Points = new List<int>();
-			foreach (var item in dictionaryList)
-			{
-				//if (item.Key.Contains("Step"))
-				//{
-				//	point = PiontsDictionary[item.Value];
-				//	Points.Add(point);
-				//	if (point != 0)
-				//		level++;
-				//}
+				// Get points for that specific learn id
+				int point = 0;
+				int level = 0;
+				string fulfill = "";
+				string badge = "";
+				List<int> Points = new List<int>();
+				List<string> Steps = new List<string>();
+				foreach (var item in dictionaryList)
+				{
+					if (item.Key.Contains("Step"))
+					{
+						Points.Add(PiontsDictionary[item.Value]);
+						Steps.Add(item.Key);
+					}
 
-				if (item.Key.Equals("FulfillmentAll"))
-				{
-					fulfill = item.Value;
+					if (item.Key.Equals("FulfillmentAll"))
+					{
+						fulfill = item.Value;
+					}
+
+					if (item.Key.Equals("Points"))
+					{
+						point = int.Parse(item.Value);
+					}
+					if (item.Key.Equals("Level"))
+					{
+						level = int.Parse(item.Value);
+					}
+					if (item.Key.Equals("Badge"))
+					{
+						badge = item.Value;
+					}
 				}
 
-				if (item.Key.Equals("Points"))
-				{
-					point = int.Parse(item.Value);
-				}
-				if (item.Key.Equals("Level"))
-				{
-					level = int.Parse(item.Value);
-				}
-				if (item.Key.Equals("Badge"))
-				{
-					badge = item.Value;
-				}
-			}
-
-			// ful
-			string aa = fulfill.Remove(fulfill.IndexOf('%'));
+				// ful
+				string aa = fulfill.Remove(fulfill.IndexOf('%'));
 			ViewBag.Fulfillment =  int.Parse(aa);
 			//ViewBag.Point = Points.Sum();
 			ViewBag.Point = point;
 			ViewBag.Levels = level;
-			ViewBag.Badge = badge;
+			ViewBag.Badge = badge; 
+			ViewBag.PointsList = Points;
+			ViewBag.StepsList = Steps;
+			ViewBag.StepsCount = Steps.Count;
 
+			var existingRecord =  _db.LeaderBoaders.SingleOrDefault(m => m.Username == userInfo.UserId && m.CaseStudy == _caseStudy);
 
+				var records = new LeaderBoader()
+			{
+				CaseStudy = "MM" ,
+				Username = userInfo.UserId,
+				Point = point
+			 };
+
+				if (existingRecord != null)
+				{
+					existingRecord.Username = userInfo.UserId;
+					existingRecord.Point = point;
+					existingRecord.CaseStudy = _caseStudy;
+
+					_db.SaveChanges();
+				}
+				else
+				{
+					// If the record doesn't exist, add a new record to the database
+					_db.LeaderBoaders.Add(records);
+					_db.SaveChanges();
+				}
+
+			//	await _db.SaveChangesAsync();
 
 				return View();
 		}
@@ -224,10 +252,10 @@ namespace Gamification.UI.Controllers
 
 			var PiontsDictionary = new Dictionary<string, int>()
 			{
-				{"@08@", 10},
-				{"@09@", 8},
+				{"@08@10", 10},
+				{"@09@7", 8},
 				{"@0A@", 7 },
-				{"", 0}
+				{"0", 0}
 			};
 
 			foreach (var property in jToken.Children<JProperty>())
@@ -246,9 +274,14 @@ namespace Gamification.UI.Controllers
 			string fulfill = "";
 			string badge = "";
 			List<int> Points = new List<int>();
+			List<string> Steps = new List<string>();
 			foreach (var item in dictionaryList)
 			{
-				
+				if (item.Key.Contains("Step"))
+				{
+					Points.Add(PiontsDictionary[item.Value]);
+					Steps.Add(item.Key);
+				}
 
 				if (item.Key.Equals("FulfillmentAll"))
 				{
@@ -275,10 +308,34 @@ namespace Gamification.UI.Controllers
 			//ViewBag.Point = Points.Sum();
 			ViewBag.Point = point;
 			ViewBag.Levels = level;
-
+			ViewBag.PointsList = Points;
+			ViewBag.StepsList = Steps;
+			ViewBag.StepsCount = Steps.Count;
 			ViewBag.Badge = badge;
 
+			var existingRecord = _db.LeaderBoaders.SingleOrDefault(m => m.Username == userInfo.UserId && m.CaseStudy == _caseStudy);
 
+			var records = new LeaderBoader()
+			{
+				CaseStudy = _caseStudy,
+				Username = userInfo.UserId,
+				Point = point
+			};
+
+			if (existingRecord != null)
+			{
+				existingRecord.Username = userInfo.UserId;
+				existingRecord.Point = point;
+				existingRecord.CaseStudy = _caseStudy;
+
+				_db.SaveChanges();
+			}
+			else
+			{
+				// If the record doesn't exist, add a new record to the database
+				_db.LeaderBoaders.Add(records);
+				_db.SaveChanges();
+			}
 
 
 				return View();
@@ -357,9 +414,9 @@ namespace Gamification.UI.Controllers
 		return Ok(dataa);
 	}
 
-	public async Task<IActionResult> LeaderBoard()
+	public async Task<IActionResult> LeaderBoard(string caseStudy = "MM")
 	{
-		var data = await _tasksServices.GetLeaders();
+		var data = await _tasksServices.GetLeaders(caseStudy);
 		return View(data);
 	}
 

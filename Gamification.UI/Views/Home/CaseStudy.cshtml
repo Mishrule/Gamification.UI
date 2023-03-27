@@ -45,7 +45,7 @@
                                 </div>
                             </div>
                             <span class="d-block mb-1">Points</span>
-                            <h3 class="card-title text-nowrap mb-2"><span id="pPoints">@ViewBag.Point</span></h3>
+                            <h3 class="card-title text-nowrap mb-2"><span id="casePoints">@ViewBag.Point</span></h3>
                             <small class="text-danger fw-semibold"><i class="bx bx-up-arrow-alt"></i>next step +10</small>
                         </div>
                     </div>
@@ -63,7 +63,7 @@
 
                             </div>
                             <span>Badges</span>
-                            <h5 class="card-title text-nowrap mb-2 p-2"><span id="pBadges">@ViewBag.Badge</span></h5>
+                            <h5 class="card-title text-nowrap mb-2 p-2"><span id="caseBadges">@ViewBag.Badge</span></h5>
                             <small class="text-success fw-semibold "><i class="bx bx-up-arrow-alt"></i>next badge</small>
                         </div>
                     </div>
@@ -99,7 +99,7 @@
                                 </div>
                             </div>
                             <span class="d-block mb-1">Levels</span>
-                            <h3 class="card-title text-nowrap mb-2"><span id="pLevels">@ViewBag.Levels</span></h3>
+                            <h3 class="card-title text-nowrap mb-2"><span id="caseLevels">@ViewBag.Levels</span></h3>
                             <small class="text-danger fw-semibold"><i class="bx bx-up-arrow-alt"></i>next step +1</small>
                         </div>
                     </div>
@@ -128,14 +128,14 @@
                                 <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
                                     <div class="card-title">
                                         <h5 class="text-nowrap mb-2">Steps Report</h5>
-                                        <span class="badge bg-label-warning rounded-pill">Total steps <span>17</span></span>
+                                        <span class="badge bg-label-warning rounded-pill">Total steps <span>@ViewBag.StepsCount</span></span>
                                     </div>
-                                    <div class="mt-sm-auto">
+                                    @*<div class="mt-sm-auto">
                                         <small class="text-success text-nowrap fw-semibold"><i class="bx bx-chevron-up"></i> completed</small>
                                         <h3 class="mb-0">2</h3>
-                                    </div>
+                                    </div>*@
                                 </div>
-                                <div id="profileReportChart"></div>
+                                @*<div id="profileReportChart"></div>*@
                             </div>
                         </div>
                     </div>
@@ -165,268 +165,27 @@ else
 }
 
 @section scripts{
-    <partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial"/>
     <script type="text/javascript">
         $("#process").text(returnProcess(firstValue));
-       
-        $(document).ready(function () {
+        localStorage.clear();
+        $(document).ready(function() {
+            setData($("#casePoints").text(), $("#caseLevels").text(), $("#caseBadges").text());
+
+            var steps = '@Html.Raw(Json.Serialize(ViewBag.StepsList))';
+            var points = '@Html.Raw(Json.Serialize(ViewBag.PointsList))';
+
+            var pointsArray = JSON.parse(points);
+            var stepsArray = JSON.parse(steps);
             
-            var options = {
-                series: [
-                    {
-                        name: 'Actual',
-                        data: [
-                            {
-                                x: 'step1',
-                                y: 5,
-                                goals: [
-                                    {
-                                        name: 'Expected',
-                                        value: 5,
-                                        strokeHeight: 5,
-                                        strokeColor: '#775DD0'
-                                    }
-                                ]
-                            },
-                            {
-                                x: 'step2',
-                                y: 10,
-                                goals: [
-                                    {
-                                        name: 'Expected',
-                                        value: 10,
-                                        strokeHeight: 5,
-                                        strokeColor: '#775DD0'
-                                    }
-                                ]
-                            },
-                            {
-                                x: 'step3',
-                                y: 10,
-                                goals: [
-                                    {
-                                        name: 'Expected',
-                                        value: 10,
-                                        strokeHeight: 5,
-                                        strokeColor: '#775DD0'
-                                    }
-                                ]
-                            },
-                            {
-                                x: 'step4',
-                                y: 10,
-                                goals: [
-                                    {
-                                        name: 'Expected',
-                                        value: 10,
-                                        strokeHeight: 5,
-                                        strokeColor: '#775DD0'
-                                    }
-                                ]
-                            },
-                            {
-                                x: 'step5',
-                                y: 5,
-                                goals: [
-                                    {
-                                        name: 'Expected',
-                                        value: 10,
-                                        strokeHeight: 13,
-                                        strokeWidth: 0,
-                                        strokeLineCap: 'round',
-                                        strokeColor: '#775DD0'
-                                    }
-                                ]
-                            },
-                            {
-                                x: 'step6',
-                                y: 5,
-                                goals: [
-                                    {
-                                        name: 'Expected',
-                                        value: 10,
-                                        strokeHeight: 5,
-                                        strokeColor: '#775DD0'
-                                    }
-                                ]
-                            },
-                            {
-                                x: 'step7',
-                                y: 10,
-                                goals: [
-                                    {
-                                        name: 'Expected',
-                                        value: 10,
-                                        strokeHeight: 5,
-                                        strokeColor: '#775DD0'
-                                    }
-                                ]
-                            },
-                            {
-                                x: 'step8',
-                                y: 10,
-                                goals: [
-                                    {
-                                        name: 'Expected',
-                                        value: 10,
-                                        strokeHeight: 2,
-                                        strokeDashArray: 2,
-                                        strokeColor: '#775DD0'
-                                    }
-                                ]
-                            },
-                            {
-                                x: 'step9',
-                                y: 5,
-                                goals: [
-                                    {
-                                        name: 'Expected',
-                                        value: 10,
-                                        strokeHeight: 2,
-                                        strokeDashArray: 2,
-                                        strokeColor: '#775DD0'
-                                    }
-                                ]
-                            },
-                            {
-                                x: 'step10',
-                                y: 10,
-                                goals: [
-                                    {
-                                        name: 'Expected',
-                                        value: 10,
-                                        strokeHeight: 2,
-                                        strokeDashArray: 2,
-                                        strokeColor: '#775DD0'
-                                    }
-                                ]
-                            },
-                            {
-                                x: 'step11',
-                                y: 5,
-                                goals: [
-                                    {
-                                        name: 'Expected',
-                                        value: 10,
-                                        strokeHeight: 2,
-                                        strokeDashArray: 2,
-                                        strokeColor: '#775DD0'
-                                    }
-                                ]
-                            },
-                            {
-                                x: 'step12',
-                                y: 10,
-                                goals: [
-                                    {
-                                        name: 'Expected',
-                                        value: 10,
-                                        strokeHeight: 2,
-                                        strokeDashArray: 2,
-                                        strokeColor: '#775DD0'
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ],
-                chart: {
-                    height: 350,
-                    type: 'bar'
-                },
-                plotOptions: {
-                    bar: {
-                        columnWidth: '60%'
-                    }
-                },
-                colors: ['#00E396'],
-                dataLabels: {
-                    enabled: false
-                },
-                legend: {
-                    show: true,
-                    showForSingleSeries: true,
-                    customLegendItems: ['Actual', 'Expected'],
-                    markers: {
-                        fillColors: ['#00E396', '#775DD0']
-                    }
-                }
-            };
 
-            var chart = new ApexCharts(document.querySelector("#charts"), options);
-            chart.render();
+            plotGraph(pointsArray, stepsArray);
+
+            
+    });
+        $(window).on("load", function () {
+            showStoredData();
         });
-/*
-        function LoadDefaultData() {
-            var badges = 0;
-            var crown = 0;
-            var point = 0;
-
-            localStorage.setItem('badges', badges);
-            localStorage.setItem('crown', crown);
-            localStorage.setItem('point', point);
-
-            badges = localStorage.getItem('badges');
-            crown = localStorage.getItem('crown');
-            point = localStorage.getItem('point');
-
-
-
-            $('#point').text(point);
-
-            if (point >= 15) {
-                badges += 1
-                localStorage.setItem('badges', badges);
-
-            } if (point >= 30) {
-                badges += 1
-                crown += 1
-                localStorage.setItem('badges', badges);
-                localStorage.setItem('crown', crown);
-            }
-            $('#badges').text(badges);
-            $('#crown').text(crown);
-
-            window.username = $('#userName').text();
-            var username = window.username;
-
-            localStorage.setItem("stat", username);
-            //alert(window.username);
-            $.ajax({
-                url: '/Home/Index',
-                method: 'POST',
-                data: { username },
-                success: function (data) {
-                    console.log(data);
-                    localStorage.setItem('point', data.p);
-                    $('#point').text(data.p);
-                    $('#pCrown').text(data.c);
-                    $('#pGrowth').text(data.p);
-                    $('#pBadge').text(data.b);
-                    $('#pPoint').text(data.p);
-                    $('#pTitle').text(data.p);
-                    if (point >= 30) {
-                        var b = parseInt(badges) + 1;
-
-                        localStorage.setItem('badges', b);
-                        $('#badges').text(b);
-
-                        var c = parseInt(crown) + 1;
-                        localStorage.setItem('crown', crown);
-                        $('#crown').text(c);
-                        console.log("c: " + c)
-                    } else if (data.p >= 15 && data.p <= 29) {
-                        var b = parseInt(badges) + 1;
-                        localStorage.setItem('badges', b);
-                        $('#badges').text(b);
-                    }
-
-
-                }
-            });
-        }
-
-*/
 
     </script>
 }

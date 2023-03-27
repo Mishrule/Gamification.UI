@@ -1,12 +1,12 @@
-﻿@model IEnumerable<Gamification.UI.Data.Scores>
+﻿@model IEnumerable<Gamification.UI.Models.LeaderBoader>
 <div class = "row">
     <!-- Order Statistics -->
     <div class = "col-md-12 col-lg-12 col-xl-12 col-sm-12 order-0 mb-4">
         <div class = "card h-100">
             <div class = "card-header d-flex align-items-center justify-content-between pb-0">
                 <div class = "card-title mb-0">
-                    <h5 class = "m-0 me-2">Total Players</h5>
-                    <small class = "text-muted">@Model.Count()</small>
+                    <h5 class="m-0 me-2">Total Players: @Model.Count()</h5>
+                    <small class = "text-muted"></small>
                 </div>
                 @*<div class="dropdown">
                 <button class="btn p-0"
@@ -25,12 +25,39 @@
                 </div>*@
             </div>
             <div class = "card-body">
-                <div class = "d-flex justify-content-between align-items-center mb-3">
-                    <div class = "d-flex flex-column align-items-center gap-1">
-                        <h2 class = "mb-2">@Model.Sum(q=>q.Score)</h2>
-                        <span>Total Points</span>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <a asp-controller="Home" asp-action="LeaderBoard" asp-route-caseStudy="FI" class="menu-link">
+                                <div data-i18n="Basic" id="FI">Financial Accounting</div>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a asp-controller="Home" asp-action="LeaderBoard" asp-route-caseStudy="FI_AR" class="menu-link">
+                                <div data-i18n="Basic" id="FI_AR">Financial Account Receivable</div>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a asp-controller="Home" asp-action="LeaderBoard" asp-route-caseStudy="MM" class="menu-link">
+                                <div data-i18n="Basic" id="MM">Material Management</div>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a asp-controller="Home" asp-action="LeaderBoard" asp-route-caseStudy="SD" class="menu-link">
+                                <div data-i18n="Basic" id="SD">Sales and Distribution</div>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a asp-controller="Home" asp-action="LeaderBoard" asp-route-caseStudy="PP" class="menu-link">
+                                <div data-i18n="Basic" id="PP">Production Planning</div>
+                            </a>
+                        </div>
+
+
+                        @*<div id = "orderStatisticsChart"></div>*@
                     </div>
-                    <div id = "orderStatisticsChart"></div>
+
                 </div>
             </div>
         </div>
@@ -68,7 +95,7 @@ else
                                     </div>
                                     <div class = "user-progress">
                                         <small class = "fw-semibold">
-                                            <span class = "badge rounded-pill bg-primary">@data.Score</span>
+                                            <span class = "badge rounded-pill bg-primary">@data.Point</span>
                                         </small>
                                     </div>
                                 </div>

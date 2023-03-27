@@ -210,6 +210,13 @@ namespace Gamification.UI.Controllers
                     }
                     else
                     {
+                        //await _db.LeaderBoaders.AddAsync(new LeaderBoader()
+                        //{
+                        //    Username = user.UserId,
+                        //    CaseStudy = null,
+                        //    Point = 0
+                        //});
+                        //await _db.SaveChangesAsync();
                         await _userManager.AddToRoleAsync(user, "User");
                     }
 
