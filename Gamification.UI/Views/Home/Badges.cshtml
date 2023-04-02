@@ -1,38 +1,23 @@
-﻿<div class="row">
-    <div class="col-md-2 col-sm-2 mb-5">
-        <img class="img-thumbnail-shadow" src="~/assets/img/badges/1.png" width="100"/>
-    </div>
-    <div class="col-md-2 col-sm-2 mb-5">
-        <img class="img-thumbnail-shadow" src="~/assets/img/badges/1.png" width="100"/>
-    </div>
-    <div class="col-md-2 col-sm-2 mb-5">
-        <img class="img-thumbnail-shadow" src="~/assets/img/badges/2.png" width="100"/>
-    </div>
-
-    <div class="col-md-2 col-sm-2 mb-5">
-        <img class="img-thumbnail-shadow" src="~/assets/img/badges/3.png" width="100"/>
-    </div>
-    <div class="col-md-2 col-sm-2 mb-5">
-        <img class="img-thumbnail-shadow" src="~/assets/img/badges/4.png" width="100"/>
-    </div>
-    <div class="col-md-2 col-sm-2 mb-5">
-        <img class="img-thumbnail-shadow" src="~/assets/img/badges/5.png" width="100"/>
-    </div>
-    <div class="col-md-2 col-sm-2 mb-5">
-        <img class="img-thumbnail-shadow" src="~/assets/img/badges/6.png" width="100"/>
-    </div>
-    <div class="col-md-2 col-sm-2 mb-5">
-        <img class="img-thumbnail-shadow" src="~/assets/img/badges/7.png" width="100"/>
-    </div>
-    <div class="col-md-2 col-sm-2 mb-5">
-        <img class="img-thumbnail-shadow" src="~/assets/img/badges/8.png" width="100"/>
-    </div>
-    <div class="col-md-2 col-sm-2 mb-5">
-        <img class="img-thumbnail-shadow" src="~/assets/img/badges/9.png" width="100"/>
-    </div>
-    <div class="col-md-2 col-sm-2 mb-5">
-        <img class="img-thumbnail-shadow" src="~/assets/img/badges/10.png" width="100"/>
-    </div>
+﻿@model IEnumerable<Gamification.UI.Models.Badges>
+<div class="row">
+    @if(Model.Count().Equals(0)){
+        <div class="col-sm-12 col-md-12">
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                <strong>Sorry</strong> You don't have any batch at the moment.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    }
+    else
+    {
+        @foreach (var data in Model)
+        {
+            <div class="col-md-2 col-sm-2 mb-5">
+                <img class="img-thumbnail-shadow" src="@($"/assets/img/badges/{data.Badge}.png")" width="100" />
+            </div>
+        }
+    }
+   
 </div>
 @section scripts{
     <partial name="_ValidationScriptsPartial" />

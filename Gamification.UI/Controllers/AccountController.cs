@@ -80,7 +80,8 @@ namespace Gamification.UI.Controllers
         public async Task<IActionResult> Login(LoginViewModel model, string returnurl = null)
         {
             ViewData["ReturnUrl"] = returnurl;
-            returnurl = returnurl ?? Url.Content("/Account/ResetPassword");
+           // returnurl = returnurl ?? Url.Content("/Account/ResetPassword");
+            returnurl = returnurl ?? Url.Content("/Home/Index");
             if (ModelState.IsValid)
             {
                 var result = await _signInManager.PasswordSignInAsync(model.UserId, model.Password, model.RememberMe, lockoutOnFailure: false);

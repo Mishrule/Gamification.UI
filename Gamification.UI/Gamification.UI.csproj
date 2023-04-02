@@ -72,8 +72,4 @@
     <None Include="wwwroot\lib\jquery\dist\jquery.min.map" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\assets\img\badges\" />
-  </ItemGroup>
-
 </Project>

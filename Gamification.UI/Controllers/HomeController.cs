@@ -31,6 +31,7 @@ namespace Gamification.UI.Controllers
 	private readonly HttpClient _client;
 	private readonly IConfiguration _configuration;
 	private readonly ApplicationDbContext _db;
+	private  string _badge { get; set; }
 	public string _caseStudy { get; set; }
 
 	public HomeController(ILogger<HomeController> logger, ITasksServices tasksServices, HttpClient client,
@@ -162,7 +163,8 @@ namespace Gamification.UI.Controllers
 			//ViewBag.Point = Points.Sum();
 			ViewBag.Point = point;
 			ViewBag.Levels = level;
-			ViewBag.Badge = badge; 
+			ViewBag.Badge = badge;
+			_badge = badge;
 			ViewBag.PointsList = Points;
 			ViewBag.StepsList = Steps;
 			ViewBag.StepsCount = Steps.Count;
@@ -439,11 +441,174 @@ namespace Gamification.UI.Controllers
 		return View();
 	}
 
-	public IActionResult Badges()
+	public async Task<IActionResult> Badges()
 	{
+		var data = await getBatch();
+		var badge = new List<Badges>();
+		if (data.Contains("Login"))
+		{
+			badge.Add(new Badges()
+			{
+				Badge = "Login"
+			});
+		}
+		else if (data.Contains("Master"))
+		{
+			badge.Add(new Badges()
+			{
+				Badge = "Master"
+			});
+			badge.Add(new Badges()
+			{
+				Badge = "Login"
+			});
+		}
+		else if (data.Contains("RFQ"))
+		{
+			badge.Add(new Badges()
+			{
+				Badge = "Master"
+			});
+			badge.Add(new Badges()
+			{
+				Badge = "Login"
+			});
+				badge.Add(new Badges()
+			{
+				Badge = "RFQ"
+			});
+		}
+		else if (data.Contains("PO"))
+		{
+			badge.Add(new Badges()
+			{
+				Badge = "Master"
+			});
+			badge.Add(new Badges()
+			{
+				Badge = "Login"
+			});
+			badge.Add(new Badges()
+			{
+				Badge = "RFQ"
+			});
+				badge.Add(new Badges() { Badge = "PO" });
+		}else if (data.Contains("FI"))
+		{
+			badge.Add(new Badges()
+			{
+				Badge = "Master"
+			});
+			badge.Add(new Badges()
+			{
+				Badge = "Login"
+			});
+			badge.Add(new Badges()
+			{
+				Badge = "RFQ"
+			});
+			badge.Add(new Badges() { Badge = "PO" });
+			badge.Add(new Badges() { Badge = "FI" });
+		}
 
-		return View();
+		return View(badge);
 	}
+
+
+	public async Task<string> getBatch()
+	{
+			try
+			{
+				var userInfo = new ApplicationUser();
+
+				var userList = _db.ApplicationUsers.ToList().Where(q => q.UserId == HttpContext.User.Identity.Name.ToUpper());
+				foreach (var data in userList)
+				{
+					userInfo = new ApplicationUser()
+					{
+						ApplicationServer = data.ApplicationServer,
+						ClientId = data.ClientId,
+						UserId = data.UserId
+					};
+				}
+				var userName = "eadeborna";
+				var passwd = "Gamification123";
+
+				var url = GetUrl(userInfo.ClientId, userInfo.UserId, userInfo.ApplicationServer);
+
+				// use this handler to allow untrusted SSL Certificates
+				var handler = new HttpClientHandler();
+				handler.ClientCertificateOptions = ClientCertificateOption.Manual;
+				handler.ServerCertificateCustomValidationCallback =
+					(httpRequestMessage, cert, cetChain, policyErrors) =>
+					{
+						return true;
+					};
+
+				using var client = new HttpClient(handler);
+
+				var authToken = Encoding.ASCII.GetBytes($"{userName}:{passwd}");
+				client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic",
+					Convert.ToBase64String(authToken));
+
+				var result = await client.GetAsync(url);
+
+				var content = await result.Content.ReadAsStringAsync();
+
+
+				var dictionaryList = new List<DictionaryModel>();
+				var jObject = JObject.Parse(content);
+				var jToken = jObject["d"];
+
+
+				var PiontsDictionary = new Dictionary<string, int>()
+			{
+				{"@08@10", 10},
+				{"@09@7", 8},
+				{"@0A@", 7 },
+				{"0", 0}
+			};
+
+				foreach (var property in jToken.Children<JProperty>())
+				{
+					var dictionaryModel = new DictionaryModel
+					{
+						Key = property.Name,
+						Value = property.Value.ToString()
+					};
+					dictionaryList.Add(dictionaryModel);
+				}
+				
+				string badge = "";
+				foreach (var item in dictionaryList)
+				{
+					
+					if (item.Key.Equals("Badge"))
+					{
+						badge = item.Value;
+					}
+				}
+				
+				_badge = badge;
+
+				
+				
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e);
+				throw;
+			}
+
+			return  _badge;  
+	}
+
+
+
+
+
+
+
 
 		public IActionResult Privacy()
 	{
