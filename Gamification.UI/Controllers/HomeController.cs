@@ -418,6 +418,28 @@ namespace Gamification.UI.Controllers
 
         public async Task<IActionResult> LeaderBoard(string caseStudy = "MM")
         {
+            switch (caseStudy)
+            {
+                case "FI":
+                    ViewBag.Header = "Financial Accounting";
+                    break;
+                case "FI_AR":
+                    ViewBag.Header = "Financial Account Receivable";
+                    break;
+                case "MM":
+                    ViewBag.Header = "Material Management";
+                    break;
+                case "SD":
+                    ViewBag.Header = "Sales and Distribution";
+                    break;
+                case "PP":
+                    ViewBag.Header = "Production Planning";
+                    break;
+                default:
+                    break;
+            }
+            
+            
             var data = await _tasksServices.GetLeaders(caseStudy);
             return View(data);
         }
@@ -443,6 +465,26 @@ namespace Gamification.UI.Controllers
 
         public async Task<IActionResult> Badges(string caseStudy = "MM")
         {
+            switch (caseStudy)
+            {
+                case "FI":
+                    ViewBag.Header = "Financial Accounting";
+                    break;
+                case "FI_AR":
+                    ViewBag.Header = "Financial Account Receivable";
+                    break;
+                case "MM":
+                    ViewBag.Header = "Material Management";
+                    break;
+                case "SD":
+                    ViewBag.Header = "Sales and Distribution";
+                    break;
+                case "PP":
+                    ViewBag.Header = "Production Planning";
+                    break;
+                default:
+                    break;
+            }
             var data = await getBatch(caseStudy);
             var badge = new List<Badges>();
             if (data.Contains("Login"))

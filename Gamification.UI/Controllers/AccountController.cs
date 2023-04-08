@@ -337,7 +337,8 @@ namespace Gamification.UI.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction(nameof(InitialPage));
+           // return RedirectToAction(nameof(InitialPage));
+            return RedirectToAction(nameof(Login));
 
         }
 
