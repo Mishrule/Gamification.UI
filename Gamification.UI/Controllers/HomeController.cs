@@ -441,9 +441,9 @@ namespace Gamification.UI.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Badges()
+        public async Task<IActionResult> Badges(string caseStudy = "MM")
         {
-            var data = await getBatch();
+            var data = await getBatch(caseStudy);
             var badge = new List<Badges>();
             if (data.Contains("Login"))
             {
@@ -516,7 +516,7 @@ namespace Gamification.UI.Controllers
         }
 
 
-        public async Task<string> getBatch()
+        public async Task<string> getBatch(string caseStudy)
         {
             try
             {
@@ -535,7 +535,7 @@ namespace Gamification.UI.Controllers
                 var userName = "eadeborna";
                 var passwd = "Gamification123";
 
-                var url = GetUrl(userInfo.ClientId, userInfo.UserId, userInfo.ApplicationServer);
+                var url = GetUrl(userInfo.ClientId, userInfo.UserId, userInfo.ApplicationServer, caseStudy);
 
                 // use this handler to allow untrusted SSL Certificates
                 var handler = new HttpClientHandler();
