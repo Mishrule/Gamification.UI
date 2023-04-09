@@ -44,23 +44,27 @@ namespace Gamification.UI.Controllers
             //_caseStudy = caseStudy;
             _logger = logger;
         }
-
+/*
         public String GetUrl(int clientId, String userId, String applicationServer)
         {
             _caseStudy = "MM";
             return $"https://{applicationServer.Trim()}/sap/opu/odata/sap/ZUCC_GBM_GM_SRV/MM_FSet(Id=2,User='{userId.ToUpper().Trim()}')?$format=json&sap-client={clientId}";
             //return $"https://{applicationServer.Trim()}/sap/opu/odata/sap/ZUCC_GBM_SRV/MM_FSet(Id=2,User='{userId.ToUpper().Trim()}')?$format=json&sap-client={clientId}";
         }
-
-        public String GetUrl(int clientId, String userId, String applicationServer, string caseStudy = "MM")
+        */
+        public String GetUrl(int clientId = 111, string userId = "LEARN-30", string applicationServer = "e45z.4.ucc.md/sap", string caseStudy = "MM")
         {
             _caseStudy = caseStudy;
             return $"https://{applicationServer.Trim()}/sap/opu/odata/sap/ZUCC_GBM_GM_SRV/{caseStudy}_FSet(Id=2,User='{userId.ToUpper().Trim()}')?$format=json&sap-client={clientId}";
             //return $"https://{applicationServer.Trim()}/sap/opu/odata/sap/ZUCC_GBM_SRV/MM_FSet(Id=2,User='{userId.ToUpper().Trim()}')?$format=json&sap-client={clientId}";
         }
 
-
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
+        {
+            return View();
+        }
+        
+        public async Task<ActionResult> Dashboard(string caseStudy="MM")
         {
             try
             {
@@ -87,7 +91,8 @@ namespace Gamification.UI.Controllers
                 var userName = "eadeborna";
                 var passwd = "Gamification123";
 
-                var url = GetUrl(userInfo.ClientId, userInfo.UserId, userInfo.ApplicationServer);
+                //var url = GetUrl(userInfo.ClientId, userInfo.UserId, userInfo.ApplicationServer);
+                var url = GetUrl(userInfo.ClientId, userInfo.UserId, userInfo.ApplicationServer, caseStudy);
 
                 // use this handler to allow untrusted SSL Certificates
                 var handler = new HttpClientHandler();
@@ -374,7 +379,7 @@ namespace Gamification.UI.Controllers
             public string Key { get; set; }
             public string Value { get; set; }
         }
-
+/*
         [HttpPost]
         public async Task<IActionResult> Index(string username)
         {
@@ -415,7 +420,7 @@ namespace Gamification.UI.Controllers
 
             return Ok(dataa);
         }
-
+*/
         public async Task<IActionResult> LeaderBoard(string caseStudy = "MM")
         {
             switch (caseStudy)
