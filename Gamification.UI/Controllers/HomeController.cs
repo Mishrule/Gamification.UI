@@ -68,14 +68,7 @@ namespace Gamification.UI.Controllers
         {
             try
             {
-                // delete all the records in the leaderboard
-                //var rows = from o in _db.LeaderBoaders
-                //           select o;
-                //foreach (var row in rows)
-                //{
-                //    _db.LeaderBoaders.Remove(row);
-                //}
-                //_db.SaveChanges();
+                
                 var userInfo = new ApplicationUser();
 
                 var userList = _db.ApplicationUsers.ToList().Where(q => q.UserId == HttpContext.User.Identity.Name.ToUpper());
