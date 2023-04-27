@@ -1,25 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using Gamification.UI.Data;
+﻿using Gamification.UI.Data;
 using Gamification.UI.Models;
 using Gamification.UI.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System.Diagnostics;
-using System.Net.Http;
-using System.Net.Http.Json;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
-using System.Text;
-using System.Net.Http.Headers;
-using Newtonsoft.Json;
-using static Gamification.UI.Models.SapModel;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
-using System.Drawing;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using System.Runtime.Intrinsics.X86;
-using Microsoft.EntityFrameworkCore;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Gamification.UI.Controllers
 {
@@ -52,10 +46,10 @@ namespace Gamification.UI.Controllers
             //return $"https://{applicationServer.Trim()}/sap/opu/odata/sap/ZUCC_GBM_SRV/MM_FSet(Id=2,User='{userId.ToUpper().Trim()}')?$format=json&sap-client={clientId}";
         }
         */
-        public String GetUrl(int clientId = 111, string userId = "LEARN-30", string applicationServer = "e45z.4.ucc.md/sap", string caseStudy = "MM")
+        public String GetUrl(int clientId = 101, string userId = "LEARN-050", string applicationServer = "trek.ucc.uwm.edu", string caseStudy = "MM")
         {
             _caseStudy = caseStudy;
-            return $"https://{applicationServer.Trim()}/sap/opu/odata/sap/ZUCC_GBM_GM_SRV/{caseStudy}_FSet(Id=2,User='{userId.ToUpper().Trim()}')?$format=json&sap-client={clientId}";
+            return $"http://{applicationServer.Trim()}/sap/opu/odata/sap/ZUCC_GBM_GM_SRV/{caseStudy}_FSet(Id=2,User='{userId.ToUpper().Trim()}')?$format=json&sap-client={clientId}";
             //return $"https://{applicationServer.Trim()}/sap/opu/odata/sap/ZUCC_GBM_SRV/MM_FSet(Id=2,User='{userId.ToUpper().Trim()}')?$format=json&sap-client={clientId}";
         }
 
@@ -81,8 +75,10 @@ namespace Gamification.UI.Controllers
                         UserId = data.UserId
                     };
                 }
-                var userName = "eadeborna";
-                var passwd = "Gamification123";
+               // var userName = "eadeborna";
+                //var passwd = "Gamification123";
+                var userName = "TEACH-003";
+                var passwd = "Naqiya99";
 
                 //var url = GetUrl(userInfo.ClientId, userInfo.UserId, userInfo.ApplicationServer);
                 var url = GetUrl(userInfo.ClientId, userInfo.UserId, userInfo.ApplicationServer, caseStudy);
@@ -228,8 +224,8 @@ namespace Gamification.UI.Controllers
                         UserId = data.UserId
                     };
                 }
-                var userName = "eadeborna";
-                var passwd = "Gamification123";
+                var userName = "TEACH-003";
+                var passwd = "Naqiya99";
 
                 var url = GetUrl(userInfo.ClientId, userInfo.UserId, userInfo.ApplicationServer, caseStudy);
 
@@ -572,8 +568,8 @@ namespace Gamification.UI.Controllers
                         UserId = data.UserId
                     };
                 }
-                var userName = "eadeborna";
-                var passwd = "Gamification123";
+                var userName = "TEACH-003";
+                var passwd = "Naqiya99";
 
                 var url = GetUrl(userInfo.ClientId, userInfo.UserId, userInfo.ApplicationServer, caseStudy);
 
