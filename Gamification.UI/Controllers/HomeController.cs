@@ -52,10 +52,10 @@ namespace Gamification.UI.Controllers
             //return $"https://{applicationServer.Trim()}/sap/opu/odata/sap/ZUCC_GBM_SRV/MM_FSet(Id=2,User='{userId.ToUpper().Trim()}')?$format=json&sap-client={clientId}";
         }
         */
-        public String GetUrl(int clientId = 111, string userId = "LEARN-30", string applicationServer = "e45z.4.ucc.md/sap", string caseStudy = "MM")
+        public String GetUrl(int clientId = 101, string userId = "LEARN-30", string applicationServer = "e45z.4.ucc.md/sap", string caseStudy = "FI_AR")
         {
             _caseStudy = caseStudy;
-            return $"https://{applicationServer.Trim()}/sap/opu/odata/sap/ZUCC_GBM_GM_SRV/{caseStudy}_FSet(Id=2,User='{userId.ToUpper().Trim()}')?$format=json&sap-client={clientId}";
+            return $"http://{applicationServer.Trim()}/sap/opu/odata/sap/ZUCC_GBM_GM_SRV/{caseStudy}_FSet(Id=2,User='{userId.ToUpper().Trim()}')?$format=json&sap-client={clientId}";
             //return $"https://{applicationServer.Trim()}/sap/opu/odata/sap/ZUCC_GBM_SRV/MM_FSet(Id=2,User='{userId.ToUpper().Trim()}')?$format=json&sap-client={clientId}";
         }
 
@@ -64,7 +64,7 @@ namespace Gamification.UI.Controllers
             return View();
         }
         
-        public async Task<ActionResult> Dashboard(string caseStudy="MM")
+        public async Task<ActionResult> Dashboard(string caseStudy= "FI_AR")
         {
             try
             {
@@ -81,8 +81,8 @@ namespace Gamification.UI.Controllers
                         UserId = data.UserId
                     };
                 }
-                var userName = "eadeborna";
-                var passwd = "Gamification123";
+                var userName = "TEACH-003";
+                var passwd = "Naqiya99";
 
                 //var url = GetUrl(userInfo.ClientId, userInfo.UserId, userInfo.ApplicationServer);
                 var url = GetUrl(userInfo.ClientId, userInfo.UserId, userInfo.ApplicationServer, caseStudy);
@@ -192,7 +192,7 @@ namespace Gamification.UI.Controllers
                     // If the record doesn't exist, create it
                     var records = new LeaderBoader()
                     {
-                        CaseStudy = "MM",
+                        CaseStudy = "FI_AR",
                         Username = userInfo.UserId,
                         Point = point
                     };
@@ -414,7 +414,7 @@ namespace Gamification.UI.Controllers
             return Ok(dataa);
         }
 */
-        public async Task<IActionResult> LeaderBoard(string caseStudy = "MM")
+        public async Task<IActionResult> LeaderBoard(string caseStudy = "FI_AR")
         {
             switch (caseStudy)
             {
@@ -461,7 +461,7 @@ namespace Gamification.UI.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Badges(string caseStudy = "MM")
+        public async Task<IActionResult> Badges(string caseStudy = "FI_AR")
         {
             switch (caseStudy)
             {
@@ -572,8 +572,8 @@ namespace Gamification.UI.Controllers
                         UserId = data.UserId
                     };
                 }
-                var userName = "eadeborna";
-                var passwd = "Gamification123";
+                var userName = "TEACH-003";
+                var passwd = "Naqiya99";
 
                 var url = GetUrl(userInfo.ClientId, userInfo.UserId, userInfo.ApplicationServer, caseStudy);
 

@@ -36,7 +36,7 @@ function returnProcess(process) {
 	switch (process) {
 	
 		case "FI":
-			output = "Financial Accounting";
+			output = "FI - Accounts Payable";
 			showStats($("#FI"));
 			break;
 		case "SD":
@@ -48,7 +48,7 @@ function returnProcess(process) {
 			showStats($("#PP"));
 			break;
 		case "FI_AR":
-			output = "Financial Account Receivable";
+			output = "FI - Accounts Receivable";
 			showStats($("#FI_AR"));
 			break;
 		case "MM":
