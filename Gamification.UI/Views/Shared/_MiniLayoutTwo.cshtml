@@ -130,6 +130,22 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <script src="~/assets/js/ui-modals.js"></script>
+  <script>
+    function updateTime() {
+      var now = new Date();
+      var hours = now.getHours().toString().padStart(2, '0');
+      var minutes = now.getMinutes().toString().padStart(2, '0');
+      var seconds = now.getSeconds().toString().padStart(2, '0');
+      var timeString = `${hours}:${minutes}:${seconds}`;
+      document.getElementById('clock').innerHTML = timeString;
+
+      var date = now.toLocaleDateString();
+      document.getElementById('date').innerHTML = date;
+    }
+    updateTime();
+    setInterval(updateTime, 1000);
+  </script>
 
      @await RenderSectionAsync("Scripts", required: false)
   </body>
