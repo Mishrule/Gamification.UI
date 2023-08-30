@@ -75,8 +75,8 @@ namespace Gamification.UI.Controllers
                         UserId = data.UserId
                     };
                 }
-                var userName = "eadeborna";
-                var passwd = "Gamification123";
+                var userName = "TEACH-003";
+                var passwd = "Naqiya99";
 
                 //var url = GetUrl(userInfo.ClientId, userInfo.UserId, userInfo.ApplicationServer);
                 var url = GetUrl(userInfo.ClientId, userInfo.UserId, userInfo.ApplicationServer, caseStudy);
