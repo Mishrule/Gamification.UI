@@ -52,7 +52,7 @@ namespace Gamification.UI.Controllers
             //return $"https://{applicationServer.Trim()}/sap/opu/odata/sap/ZUCC_GBM_SRV/MM_FSet(Id=2,User='{userId.ToUpper().Trim()}')?$format=json&sap-client={clientId}";
         }
         */
-        public String GetUrl(int clientId = 101, string userId = "LEARN-30", string applicationServer = "e45z.4.ucc.md/sap", string caseStudy = "FI_AR")
+        public String GetUrl(int clientId = 101, string userId = "LEARN-30", string applicationServer = "e45z.4.ucc.md/sap", string caseStudy = "MM")
         {
             _caseStudy = caseStudy;
             return $"http://{applicationServer.Trim()}/sap/opu/odata/sap/ZUCC_GBM_GM_SRV/{caseStudy}_FSet(Id=2,User='{userId.ToUpper().Trim()}')?$format=json&sap-client={clientId}";
@@ -64,7 +64,7 @@ namespace Gamification.UI.Controllers
             return View();
         }
         
-        public async Task<ActionResult> Dashboard(string caseStudy= "FI_AR")
+        public async Task<ActionResult> Dashboard(string caseStudy= "MM")
         {
             try
             {
@@ -228,8 +228,8 @@ namespace Gamification.UI.Controllers
                         UserId = data.UserId
                     };
                 }
-                var userName = "eadeborna";
-                var passwd = "Gamification123";
+                var userName = "TEACH-003";
+                var passwd = "Naqiya99";
 
                 var url = GetUrl(userInfo.ClientId, userInfo.UserId, userInfo.ApplicationServer, caseStudy);
 
@@ -414,15 +414,15 @@ namespace Gamification.UI.Controllers
             return Ok(dataa);
         }
 */
-        public async Task<IActionResult> LeaderBoard(string caseStudy = "FI_AR")
+        public async Task<IActionResult> LeaderBoard(string caseStudy = "MM")
         {
             switch (caseStudy)
             {
                 case "FI":
-                    ViewBag.Header = "Financial Accounting";
+                    ViewBag.Header = "FI - Accounts Payable";
                     break;
                 case "FI_AR":
-                    ViewBag.Header = "Financial Account Receivable";
+                    ViewBag.Header = "FI - Accounts Receivable";
                     break;
                 case "MM":
                     ViewBag.Header = "Material Management";
@@ -461,15 +461,15 @@ namespace Gamification.UI.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Badges(string caseStudy = "FI_AR")
+        public async Task<IActionResult> Badges(string caseStudy = "MM")
         {
             switch (caseStudy)
             {
                 case "FI":
-                    ViewBag.Header = "Financial Accounting";
+                    ViewBag.Header = "FI - Accounts Payable";
                     break;
                 case "FI_AR":
-                    ViewBag.Header = "Financial Account Receivable";
+                    ViewBag.Header = "FI - Accounts Receivable";
                     break;
                 case "MM":
                     ViewBag.Header = "Material Management";
