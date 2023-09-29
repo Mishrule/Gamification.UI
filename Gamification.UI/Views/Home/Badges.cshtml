@@ -1,6 +1,14 @@
 ﻿@model IEnumerable<Gamification.UI.Models.Badges>
 <div class="row">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-W3455SHKRR"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
+        gtag('config', 'G-W3455SHKRR');
+    </script>
     <div class="col-md-3">
         <a asp-controller="Home" asp-action="Badges" asp-route-caseStudy="FI_AR" class="btn btn-outline-primary">
             <div data-i18n="Basic" id="FI_AR">FI - Accounts Receivable</div>
